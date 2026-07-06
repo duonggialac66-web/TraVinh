@@ -1,0 +1,206 @@
+// Prisma schema cho trang giới thiệu quê hương Trà Vinh
+// Kết nối với Neon: đặt DATABASE_URL trong biến môi trường (.env)
+// Sau khi cắm Neon, chạy:
+//   npx prisma generate
+//   npx prisma db push        (tạo bảng)
+//   npx prisma db seed        (nạp dữ liệu mẫu - xem prisma/seed.ts)
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// Nội dung chung của trang (hero, giới thiệu, liên hệ...).
+/// Dùng 1 bản ghi duy nhất với id = "singleton".
+model SiteContent {
+  id String @id @default("singleton")
+
+  // Hero
+  heroKicker   String @default("Miền đất chín rồng")
+  heroTitle    String @default("Trà Vinh")
+  heroSubtitle String @default("Nơi phù sa sông Hậu gặp gỡ hồn Khmer, những hàng cây cổ thụ và mùi biển mặn Ba Động.")
+  heroImage    String @default("/images/hero-tra-vinh.png")
+  logoImage    String @default("/logo.png")
+
+  // Giới thiệu tổng quan
+  aboutHeading String @default("Vùng đất của cây và nước")
+  aboutBody    String @default("Trà Vinh nằm giữa hai dòng sông Tiền và sông Hậu, là nơi giao thoa của ba dân tộc Kinh - Khmer - Hoa. Những ngôi chùa Khmer trăm tuổi, hàng cây sao dầu cổ thụ và những vườn dừa sáp trĩu quả tạo nên một bản sắc không nơi nào có được.")
+
+  // Liên hệ
+  contactHeading String @default("Ghé thăm Trà Vinh")
+  contactBody    String @default("Cách TP. Hồ Chí Minh khoảng 130km về phía Tây Nam. Thời điểm đẹp nhất để ghé thăm là vào mùa lễ Ok Om Bok (tháng 10 âm lịch).")
+  contactEmail   String @default("hello@travinh.travel")
+  contactPhone   String @default("+84 294 3862 xxx")
+  mapEmbedUrl    String @default("https://www.openstreetmap.org/export/embed.html?bbox=106.20%2C9.85%2C106.45%2C9.98&layer=mapnik")
+
+  updatedAt DateTime @updatedAt
+}
+
+/// Địa điểm nổi bật
+model Location {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  content     String   @default("")
+  image       String
+  tag         String   @default("Điểm đến")
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+/// Văn hóa & lễ hội
+model Festival {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  content     String   @default("")
+  image       String
+  season      String   @default("")
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+/// Ẩm thực đặc sản
+model Food {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  image       String
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+/// Ảnh trong thư viện ảnh
+model GalleryImage {
+  id        String   @id @default(cuid())
+  image     String
+  caption   String   @default("")
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+/// Tour du lịch
+model Tour {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  price       String   @default("Liên hệ")
+  duration    String   @default("1 Ngày")
+  image       String
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+/// Sản phẩm đặc sản (Shop)
+model Product {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  price       String   @default("Liên hệ")
+  image       String
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+/// Người dùng đăng ký
+model User {
+  id            String         @id @default(cuid())
+  name          String?
+  email         String?        @unique
+  password      String?
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  productOrders ProductOrder[]
+  tourBookings  TourBooking[]
+  createdAt     DateTime       @default(now())
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+/// Đơn hàng Mua Đặc Sản
+model ProductOrder {
+  id     String  @id @default(cuid())
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  customerName  String
+  customerPhone String
+  customerNote  String?
+
+  items       OrderItem[]
+  totalAmount Int         @default(0)
+  status      String      @default("PENDING")
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model OrderItem {
+  id          String       @id @default(cuid())
+  orderId     String
+  order       ProductOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId   String
+  productName String
+  price       Int          @default(0)
+  quantity    Int          @default(1)
+}
+
+/// Đặt Tour Du Lịch
+model TourBooking {
+  id     String  @id @default(cuid())
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  customerName  String
+  customerPhone String
+  customerNote  String?
+
+  tourId       String
+  tourName     String
+  tourDate     String
+  participants Int
+  totalAmount  Int    @default(0)
+
+  status    String   @default("PENDING")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
