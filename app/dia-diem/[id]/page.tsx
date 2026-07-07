@@ -9,6 +9,11 @@ import { getLandingData } from "@/lib/content"
 import { Tours } from "@/components/landing/tours"
 import { Footer } from "@/components/landing/footer"
 
+export async function generateStaticParams() {
+  const { locations } = await getLandingData()
+  return locations.map((loc) => ({ id: loc.id }))
+}
+
 export default async function LocationDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const id = (await params).id
   const { tours } = await getLandingData()

@@ -79,7 +79,7 @@ export function Products({ products }: { products: Product[] }) {
                     alt={product.title}
                     fill
                     className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </div>
               </div>

@@ -1,4 +1,5 @@
 import { prisma, isDatabaseConfigured } from "@/lib/prisma"
+import { unstable_cache, revalidateTag } from "next/cache"
 import {
   defaultSiteContent,
   defaultLocations,
@@ -38,15 +39,8 @@ const fallbackData: LandingData = {
   usingFallback: true,
 }
 
-/**
- * Lấy toàn bộ dữ liệu cho trang landing.
- */
-export async function getLandingData(): Promise<LandingData> {
-  if (!isDatabaseConfigured) {
-    return fallbackData
-  }
-
-  try {
+const getCachedLandingData = unstable_cache(
+  async () => {
     const [content, locations, festivals, foods, gallery, tours, products] = await Promise.all([
       prisma.siteContent.findUnique({ where: { id: "singleton" } }),
       prisma.location.findMany({ orderBy: { order: "asc" } }),
@@ -67,6 +61,21 @@ export async function getLandingData(): Promise<LandingData> {
       products: products.length ? products : defaultProducts,
       usingFallback: false,
     }
+  },
+  ['landing-data'],
+  { revalidate: 3600, tags: ['content'] }
+)
+
+/**
+ * Lấy toàn bộ dữ liệu cho trang landing.
+ */
+export async function getLandingData(): Promise<LandingData> {
+  if (!isDatabaseConfigured) {
+    return fallbackData
+  }
+
+  try {
+    return await getCachedLandingData()
   } catch (error) {
     console.log("[v0] getLandingData fallback:", (error as Error).message)
     return fallbackData
@@ -113,123 +122,161 @@ export async function updateSiteContent(data: Record<string, string>) {
   for (const f of fields) {
     if (typeof data[f] === "string") payload[f] = data[f]
   }
-  return prisma.siteContent.upsert({
+  const res = await prisma.siteContent.upsert({
     where: { id: "singleton" },
     update: payload,
     create: { id: "singleton", ...defaultSiteContent, ...payload },
   })
+  revalidateTag('content')
+  return res
 }
 
 /* ------------------------- Locations ------------------------- */
 export async function upsertLocation(input: Partial<Location> & { id?: string }) {
   assertDb()
   const { id, ...data } = input
+  let res
   if (id) {
-    return prisma.location.upsert({
+    res = await prisma.location.upsert({
       where: { id },
       update: data,
       create: { id, ...(data as Omit<Location, "id">) },
     })
+  } else {
+    res = await prisma.location.create({ data: data as Omit<Location, "id"> })
   }
-  return prisma.location.create({ data: data as Omit<Location, "id"> })
+  revalidateTag('content')
+  return res
 }
 
 export async function deleteLocation(id: string) {
   assertDb()
-  return prisma.location.delete({ where: { id } })
+  const res = await prisma.location.delete({ where: { id } })
+  revalidateTag('content')
+  return res
 }
 
 /* ------------------------- Festivals ------------------------- */
 export async function upsertFestival(input: Partial<Festival> & { id?: string }) {
   assertDb()
   const { id, ...data } = input
+  let res
   if (id) {
-    return prisma.festival.upsert({
+    res = await prisma.festival.upsert({
       where: { id },
       update: data,
       create: { id, ...(data as Omit<Festival, "id">) },
     })
+  } else {
+    res = await prisma.festival.create({ data: data as Omit<Festival, "id"> })
   }
-  return prisma.festival.create({ data: data as Omit<Festival, "id"> })
+  revalidateTag('content')
+  return res
 }
 
 export async function deleteFestival(id: string) {
   assertDb()
-  return prisma.festival.delete({ where: { id } })
+  const res = await prisma.festival.delete({ where: { id } })
+  revalidateTag('content')
+  return res
 }
 
 /* ------------------------- Foods ------------------------- */
 export async function upsertFood(input: Partial<Food> & { id?: string }) {
   assertDb()
   const { id, ...data } = input
+  let res
   if (id) {
-    return prisma.food.upsert({
+    res = await prisma.food.upsert({
       where: { id },
       update: data,
       create: { id, ...(data as Omit<Food, "id">) },
     })
+  } else {
+    res = await prisma.food.create({ data: data as Omit<Food, "id"> })
   }
-  return prisma.food.create({ data: data as Omit<Food, "id"> })
+  revalidateTag('content')
+  return res
 }
 
 export async function deleteFood(id: string) {
   assertDb()
-  return prisma.food.delete({ where: { id } })
+  const res = await prisma.food.delete({ where: { id } })
+  revalidateTag('content')
+  return res
 }
 
 /* ------------------------- Gallery ------------------------- */
 export async function upsertGalleryImage(input: Partial<GalleryImage> & { id?: string }) {
   assertDb()
   const { id, ...data } = input
+  let res
   if (id) {
-    return prisma.galleryImage.upsert({
+    res = await prisma.galleryImage.upsert({
       where: { id },
       update: data,
       create: { id, ...(data as Omit<GalleryImage, "id">) },
     })
+  } else {
+    res = await prisma.galleryImage.create({ data: data as Omit<GalleryImage, "id"> })
   }
-  return prisma.galleryImage.create({ data: data as Omit<GalleryImage, "id"> })
+  revalidateTag('content')
+  return res
 }
 
 export async function deleteGalleryImage(id: string) {
   assertDb()
-  return prisma.galleryImage.delete({ where: { id } })
+  const res = await prisma.galleryImage.delete({ where: { id } })
+  revalidateTag('content')
+  return res
 }
 
 /* ------------------------- Tours ------------------------- */
 export async function upsertTour(input: Partial<Tour> & { id?: string }) {
   assertDb()
   const { id, ...data } = input
+  let res
   if (id) {
-    return prisma.tour.upsert({
+    res = await prisma.tour.upsert({
       where: { id },
       update: data,
       create: { id, ...(data as Omit<Tour, "id">) },
     })
+  } else {
+    res = await prisma.tour.create({ data: data as Omit<Tour, "id"> })
   }
-  return prisma.tour.create({ data: data as Omit<Tour, "id"> })
+  revalidateTag('content')
+  return res
 }
 
 export async function deleteTour(id: string) {
   assertDb()
-  return prisma.tour.delete({ where: { id } })
+  const res = await prisma.tour.delete({ where: { id } })
+  revalidateTag('content')
+  return res
 }
 
 /* ------------------------- Products ------------------------- */
 export async function upsertProduct(input: Partial<Product> & { id?: string }) {
   assertDb()
   const { id, ...data } = input
+  let res
   if (id) {
-    return prisma.product.upsert({
+    res = await prisma.product.upsert({
       where: { id },
       update: data,
       create: { id, ...(data as Omit<Product, "id">) },
     })
+  } else {
+    res = await prisma.product.create({ data: data as Omit<Product, "id"> })
   }
-  return prisma.product.create({ data: data as Omit<Product, "id"> })
+  revalidateTag('content')
+  return res
 }
 
 export async function deleteProduct(id: string) {
   assertDb()
-  return prisma.product.delete({ where: { id } })
+  const res = await prisma.product.delete({ where: { id } })
+  revalidateTag('content')
+  return res
 }

@@ -10,7 +10,6 @@ import { CultureBlog } from "@/components/landing/culture-blog"
 import { Contact } from "@/components/landing/contact"
 import { Footer } from "@/components/landing/footer"
 
-export const dynamic = "force-dynamic"
 
 export default async function Page() {
   const { content, locations, festivals, foods, tours, products, gallery } = await getLandingData()

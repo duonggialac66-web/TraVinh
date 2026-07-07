@@ -6,6 +6,11 @@ import { getLandingData } from "@/lib/content"
 import { Navbar } from "@/components/landing/navbar"
 import { Footer } from "@/components/landing/footer"
 
+export async function generateStaticParams() {
+  const { festivals } = await getLandingData()
+  return festivals.map((f) => ({ id: f.id }))
+}
+
 export default async function CulturePostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const { festivals, content } = await getLandingData()

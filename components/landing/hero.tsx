@@ -46,6 +46,7 @@ export function Hero({ content }: { content: SiteContent }) {
               alt="Cảnh quan sông nước Trà Vinh"
               fill
               priority
+              loading="eager"
               className="object-cover"
             />
           )}
