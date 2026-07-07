@@ -52,7 +52,7 @@ export function Locations({ locations }: { locations: Location[] }) {
           </motion.div>
         </div>
 
-        <div className="flex flex-col lg:flex-row h-[75vh] min-h-[600px] w-full gap-4">
+        <div className="flex flex-col lg:flex-row lg:h-[75vh] lg:min-h-[600px] w-full gap-4">
           {locations.map((loc, i) => (
             <motion.div
               key={loc.id}
@@ -64,7 +64,7 @@ export function Locations({ locations }: { locations: Location[] }) {
                 delay: i * 0.15, 
                 ease: [0.16, 1, 0.3, 1] // Dramatic ease out
               }}
-              className="group relative flex-1 overflow-hidden rounded-[2rem] bg-zinc-900 transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] hover:flex-[3] lg:hover:flex-[4] focus-within:flex-[3] lg:focus-within:flex-[4] origin-bottom perspective-[1000px]"
+              className="group relative flex-1 min-h-[300px] sm:min-h-[400px] lg:min-h-0 overflow-hidden rounded-[2rem] bg-zinc-900 transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] lg:hover:flex-[4] lg:focus-within:flex-[4] origin-bottom perspective-[1000px]"
             >
               <Link href={`/dia-diem/${loc.id}`} className="block h-full w-full relative">
                 <Image
