@@ -8,7 +8,8 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
 export function CartDrawer() {
-  const { items, isOpen, setIsOpen, removeItem, updateQuantity } = useCartStore()
+  const { carts, activeUser, isOpen, setIsOpen, removeItem, updateQuantity } = useCartStore()
+  const items = carts[activeUser] || []
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
 

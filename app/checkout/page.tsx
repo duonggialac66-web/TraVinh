@@ -8,7 +8,8 @@ import Image from "next/image"
 import { ArrowLeft } from "lucide-react"
 
 export default function CheckoutPage() {
-  const { items, clearCart } = useCartStore()
+  const { carts, activeUser, clearCart } = useCartStore()
+  const items = carts[activeUser] || []
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -41,28 +42,11 @@ export default function CheckoutPage() {
       setLoading(false)
     } else {
       setSuccess(true)
-      clearCart()
+      // Không clearCart ngay để giữ giao diện nền và tránh bị auto redirect
     }
   }
 
-  if (success) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-[#F9F8F6] px-5 py-24 text-center">
-        <div className="max-w-md rounded-3xl bg-white p-8 shadow-xl">
-          <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-green-600">
-            <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-          </div>
-          <h2 className="mb-4 font-serif text-3xl font-semibold">Đặt hàng thành công!</h2>
-          <p className="mb-8 text-gray-500">Cảm ơn bạn đã ủng hộ đặc sản Trà Vinh. Chúng tôi sẽ sớm liên hệ để giao hàng cho bạn.</p>
-          <button onClick={() => router.push("/")} className="rounded-xl bg-primary px-8 py-3 font-medium text-white transition-colors hover:bg-primary/90">
-            Về trang chủ
-          </button>
-        </div>
-      </div>
-    )
-  }
+
 
   return (
     <div className="min-h-screen bg-[#F9F8F6] pb-24 pt-12">
@@ -158,6 +142,30 @@ export default function CheckoutPage() {
           </div>
         </div>
       </div>
+
+      {/* Modal Cảm ơn */}
+      {success && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+          <div className="w-full max-w-md scale-100 transform opacity-100 rounded-3xl bg-white p-8 shadow-2xl text-center transition-all">
+            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-green-600">
+              <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+            <h2 className="mb-4 font-serif text-3xl font-semibold">Đặt hàng thành công!</h2>
+            <p className="mb-8 text-gray-500">Cảm ơn bạn đã ủng hộ đặc sản Trà Vinh. Chúng tôi sẽ sớm liên hệ để giao hàng cho bạn.</p>
+            <button 
+              onClick={() => {
+                clearCart()
+                router.push("/")
+              }} 
+              className="rounded-xl bg-primary px-8 py-3 font-medium text-white transition-colors hover:bg-primary/90"
+            >
+              Hoàn tất
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

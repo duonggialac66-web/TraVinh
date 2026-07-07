@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
-import { Menu, X } from "lucide-react"
+import { Menu, X, ShoppingBag } from "lucide-react"
 import Image from "next/image"
 import { useSession, signOut } from "next-auth/react"
+import { useCartStore } from "@/store/cart"
 
 const links = [
   { href: "/#gioi-thieu", label: "Giới thiệu" },
@@ -20,6 +21,19 @@ export function Navbar() {
   const { data: session } = useSession()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+  
+  const { carts, activeUser, setActiveUser, setIsOpen: setCartOpen } = useCartStore()
+
+  useEffect(() => {
+    setMounted(true)
+    const userId = (session?.user as any)?.id
+    if (userId) {
+      setActiveUser(userId)
+    } else {
+      setActiveUser('guest')
+    }
+  }, [session, setActiveUser])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -27,6 +41,9 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
+
+  const currentItems = mounted ? (carts[activeUser] || []) : []
+  const cartCount = currentItems.reduce((sum, item) => sum + item.quantity, 0)
 
   return (
     <motion.header
@@ -73,6 +90,22 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-2">
+          {mounted && (
+            <button
+              onClick={() => setCartOpen(true)}
+              className={`relative grid size-9 place-items-center rounded-full transition-colors mr-2 ${
+                scrolled ? "hover:bg-secondary text-foreground" : "hover:bg-white/10 text-primary-foreground"
+              }`}
+            >
+              <ShoppingBag className="size-5" />
+              {cartCount > 0 && (
+                <span className="absolute -right-1 -top-1 flex size-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
+                  {cartCount}
+                </span>
+              )}
+            </button>
+          )}
+
           {session ? (
             <div className="hidden items-center gap-2 md:flex">
               <span className="text-sm font-medium text-foreground">{session.user?.name}</span>

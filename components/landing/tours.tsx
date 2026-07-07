@@ -7,6 +7,12 @@ import type { Tour } from "@/lib/default-content"
 import { Clock, Banknote, ArrowRight, X, CheckCircle2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { bookTour } from "@/app/actions/order"
+import { Great_Vibes } from "next/font/google"
+
+const scriptFont = Great_Vibes({ 
+  subsets: ["vietnamese", "latin"], 
+  weight: ["400"] 
+})
 
 export function Tours({ tours, title, subtitle }: { tours: Tour[], title?: React.ReactNode, subtitle?: React.ReactNode }) {
   const containerRef = useRef<HTMLElement>(null)
@@ -197,15 +203,23 @@ export function Tours({ tours, title, subtitle }: { tours: Tour[], title?: React
       <div className="pointer-events-none absolute inset-0 z-0 opacity-20 mix-blend-overlay" style={{ backgroundImage: "url('/images/paper-texture.png')" }} />
       
       <div className="relative z-10 mx-auto max-w-7xl px-5 lg:px-8">
-        <motion.div style={{ y: yTitle }} className="mb-20 md:mb-28 max-w-3xl">
-          <h2 className="font-serif text-[clamp(3rem,8vw,7rem)] font-medium leading-[0.9] tracking-tighter">
-            {title || (
-              <>Hành trình <br/><span className="text-primary italic">Khám phá</span></>
-            )}
-          </h2>
-          <p className="mt-8 max-w-xl text-lg font-light leading-relaxed text-[#1A1A1A]/70">
-            {subtitle || "Trải nghiệm chân thực nhịp sống, văn hóa và thiên nhiên mộc mạc của vùng đất trù phú miền Tây. Một góc nhìn khác biệt, sâu sắc và trọn vẹn."}
-          </p>
+        <motion.div style={{ y: yTitle }} className="mb-20 md:mb-28 flex flex-col md:flex-row md:items-center gap-8 md:gap-12 lg:gap-16 w-full">
+          <div className="shrink-0">
+            <h2 className="font-serif text-[clamp(3.5rem,7vw,6.5rem)] font-medium leading-[0.9] tracking-tighter flex flex-col items-start">
+              {title || (
+                <>
+                  <span className="z-10 relative">Hành trình</span>
+                  <span className={`${scriptFont.className} block text-primary text-[1.25em] leading-[0.8] ml-[2em] mt-2 -rotate-2 z-0 drop-shadow-sm whitespace-nowrap`}>Khám phá</span>
+                </>
+              )}
+            </h2>
+          </div>
+          <div className="hidden md:block h-28 w-px bg-primary/20 shrink-0" />
+          <div className="flex-1">
+            <p className="text-xl font-light leading-relaxed text-[#1A1A1A]/70 max-w-lg">
+              {subtitle || "Trải nghiệm chân thực nhịp sống, văn hóa và thiên nhiên mộc mạc của vùng đất trù phú miền Tây. Một góc nhìn khác biệt, sâu sắc và trọn vẹn."}
+            </p>
+          </div>
         </motion.div>
 
         <div className="flex flex-col gap-20 md:gap-32">

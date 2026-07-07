@@ -27,7 +27,7 @@ export default async function LocationDetailPage({ params }: { params: Promise<{
   }
 
   return (
-    <main className="relative min-h-screen bg-background pb-20">
+    <main className="relative min-h-screen bg-background pb-0">
       <Navbar />
 
       <div className="relative h-[60vh] min-h-[400px] w-full">
@@ -82,8 +82,7 @@ export default async function LocationDetailPage({ params }: { params: Promise<{
       <div className="mt-16">
         <Tours tours={tours} title={<>Đặt tour <br/><span className="text-primary italic">Ngay</span></>} subtitle="Chọn ngay một lịch trình yêu thích để bắt đầu hành trình khám phá và tận hưởng vẻ đẹp tuyệt vời của vùng đất này cùng chúng tôi." />
       </div>
-      
-      <Footer />
+      <Footer/>
     </main>
   )
 }

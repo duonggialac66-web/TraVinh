@@ -20,7 +20,8 @@ export async function POST(req: Request) {
       return new NextResponse("Email đã được sử dụng", { status: 400 });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Giảm salt xuống 8 và dùng hàm Sync để đăng ký nhanh gấp 4 lần
+    const hashedPassword = bcrypt.hashSync(password, 8);
 
     const user = await prisma.user.create({
       data: {

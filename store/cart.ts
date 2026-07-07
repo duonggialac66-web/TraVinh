@@ -4,14 +4,16 @@ import { persist } from 'zustand/middleware'
 export interface CartItem {
   id: string
   title: string
-  price: number // Lấy phần số từ string (ví dụ "150.000đ" -> 150000)
+  price: number
   quantity: number
   image: string
 }
 
 interface CartState {
-  items: CartItem[]
+  carts: Record<string, CartItem[]>
+  activeUser: string
   isOpen: boolean
+  setActiveUser: (userId: string) => void
   addItem: (item: Omit<CartItem, 'quantity'>) => void
   removeItem: (id: string) => void
   updateQuantity: (id: string, quantity: number) => void
@@ -22,36 +24,54 @@ interface CartState {
 export const useCartStore = create<CartState>()(
   persist(
     (set) => ({
-      items: [],
+      carts: {},
+      activeUser: 'guest',
       isOpen: false,
+      setActiveUser: (userId) => set({ activeUser: userId }),
       addItem: (item) =>
         set((state) => {
-          const existingItem = state.items.find((i) => i.id === item.id)
+          const currentItems = state.carts[state.activeUser] || []
+          const existingItem = currentItems.find((i) => i.id === item.id)
+          let newItems;
           if (existingItem) {
-            return {
-              items: state.items.map((i) =>
-                i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
-              ),
-              isOpen: true,
-            }
+            newItems = currentItems.map((i) =>
+              i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
+            )
+          } else {
+            newItems = [...currentItems, { ...item, quantity: 1 }]
           }
-          return { items: [...state.items, { ...item, quantity: 1 }], isOpen: true }
+          return {
+            carts: { ...state.carts, [state.activeUser]: newItems },
+            isOpen: true,
+          }
         }),
       removeItem: (id) =>
-        set((state) => ({
-          items: state.items.filter((i) => i.id !== id),
-        })),
+        set((state) => {
+          const currentItems = state.carts[state.activeUser] || []
+          return {
+            carts: { ...state.carts, [state.activeUser]: currentItems.filter((i) => i.id !== id) },
+          }
+        }),
       updateQuantity: (id, quantity) =>
+        set((state) => {
+          const currentItems = state.carts[state.activeUser] || []
+          return {
+            carts: {
+              ...state.carts,
+              [state.activeUser]: currentItems.map((i) =>
+                i.id === id ? { ...i, quantity: Math.max(1, quantity) } : i
+              ),
+            },
+          }
+        }),
+      clearCart: () =>
         set((state) => ({
-          items: state.items.map((i) =>
-            i.id === id ? { ...i, quantity: Math.max(1, quantity) } : i
-          ),
+          carts: { ...state.carts, [state.activeUser]: [] },
         })),
-      clearCart: () => set({ items: [] }),
       setIsOpen: (isOpen) => set({ isOpen }),
     }),
     {
-      name: 'cart-storage',
+      name: 'tra-vinh-cart-v2', // Đổi tên để tránh conflict với bản cũ
     }
   )
 )

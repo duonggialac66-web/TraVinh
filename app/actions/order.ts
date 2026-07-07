@@ -1,7 +1,8 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { getSession } from "@/lib/auth";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export async function checkoutCart(formData: FormData, items: Array<{ id: string, title: string, price: number, quantity: number }>, totalAmount: number) {
   const customerName = formData.get("customerName") as string;
@@ -12,11 +13,11 @@ export async function checkoutCart(formData: FormData, items: Array<{ id: string
     return { error: "Vui lòng nhập đầy đủ họ tên và số điện thoại." };
   }
 
-  const session = await getSession();
-  if (!session?.userId) {
-    return { error: "UNAUTHORIZED" };
+  const session = await getServerSession(authOptions);
+  if (!session?.user?.id) {
+    return { error: "Vui lòng đăng nhập để thực hiện chức năng này." };
   }
-  const userId = session.userId;
+  const userId = session.user.id;
 
   try {
     const order = await prisma.productOrder.create({
@@ -59,11 +60,11 @@ export async function bookTour(formData: FormData, tourId: string, tourName: str
   const numericPrice = parseInt(priceString.replace(/\D/g, "")) || 0;
   const totalAmount = numericPrice * participants;
 
-  const session = await getSession();
-  if (!session?.userId) {
-    return { error: "UNAUTHORIZED" };
+  const session = await getServerSession(authOptions);
+  if (!session?.user?.id) {
+    return { error: "Vui lòng đăng nhập để thực hiện chức năng này." };
   }
-  const userId = session.userId;
+  const userId = session.user.id;
 
   try {
     const order = await prisma.tourBooking.create({

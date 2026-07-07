@@ -31,7 +31,8 @@ export const authOptions = {
           throw new Error("Tài khoản không tồn tại hoặc đăng nhập bằng Google");
         }
         
-        const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
+        // Dùng bản Sync để tránh tình trạng lag event loop cực nặng của thư viện bcryptjs trong Next.js Dev
+        const isPasswordValid = bcrypt.compareSync(credentials.password, user.password);
         
         if (!isPasswordValid) {
           throw new Error("Mật khẩu không chính xác");

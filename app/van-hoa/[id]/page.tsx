@@ -16,8 +16,13 @@ export default async function CulturePostPage({ params }: { params: Promise<{ id
   }
 
   return (
-    <main className="min-h-screen bg-background pb-0">
-      <Navbar />
+    <main className="relative min-h-screen bg-[#F9F8F6] pb-0 overflow-hidden">
+      {/* Background chìm trang trí (Soft editorial blobs) */}
+      <div className="pointer-events-none absolute left-0 top-[30%] z-0 h-[800px] w-[800px] -translate-x-1/2 rounded-full bg-[#EAE8E3] opacity-60 blur-[120px]" />
+      <div className="pointer-events-none absolute right-0 top-[70%] z-0 h-[600px] w-[600px] translate-x-1/3 rounded-full bg-[#EAE8E3] opacity-60 blur-[100px]" />
+
+      <div className="relative z-10">
+        <Navbar />
       
       <article className="pt-20 sm:pt-24">
         {/* Header Hero */}
@@ -30,7 +35,7 @@ export default async function CulturePostPage({ params }: { params: Promise<{ id
             priority
           />
           {/* Gradients to blend image with background color */}
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#F9F8F6] via-[#F9F8F6]/40 to-black/30" />
           
           <div className="absolute inset-0 mx-auto flex max-w-4xl flex-col justify-end px-5 pb-12 sm:pb-20">
             <Link 
@@ -58,7 +63,10 @@ export default async function CulturePostPage({ params }: { params: Promise<{ id
         <div className="mx-auto max-w-3xl px-5 py-12 sm:py-24">
           <div className="prose prose-lg prose-slate dark:prose-invert max-w-none">
             {post.content ? (
-              <div dangerouslySetInnerHTML={{ __html: post.content }} className="blog-content" />
+              <div 
+                dangerouslySetInnerHTML={{ __html: post.content }} 
+                className="blog-content [&_img]:max-w-full [&_img]:h-auto [&_img]:rounded-xl [&_img]:mx-auto [&_img]:my-10 [&_img]:shadow-lg [&_p]:break-words [&_p]:mb-5 [&_p]:leading-relaxed" 
+              />
             ) : (
               <>
                 {/* Adding a drop cap for the first letter of the first paragraph for an editorial feel */}
@@ -98,6 +106,7 @@ export default async function CulturePostPage({ params }: { params: Promise<{ id
       </article>
 
       <Footer />
+      </div>
     </main>
   )
 }
