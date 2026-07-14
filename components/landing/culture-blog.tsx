@@ -57,7 +57,7 @@ export function CultureBlog({ posts }: { posts: Festival[] }) {
               <Link 
                 href={`/van-hoa/${post.id}`} 
                 key={post.id}
-                className={`group relative overflow-hidden rounded-3xl bg-secondary shadow-sm transition-all duration-500 hover:shadow-xl hover:z-20 ${getSpanClasses(i)}`}
+                className={`group relative block h-full w-full overflow-hidden rounded-3xl bg-secondary shadow-sm transition-all duration-500 hover:shadow-xl hover:z-20 ${getSpanClasses(i)}`}
               >
                 <Image
                   src={post.image || "/placeholder.svg"}
@@ -68,10 +68,10 @@ export function CultureBlog({ posts }: { posts: Festival[] }) {
                 />
                 
                 {/* Gradient Overlay appearing on hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/0 opacity-100 transition-opacity duration-300 md:opacity-0 group-hover:opacity-100" />
                 
                 {/* Content fading in and sliding up on hover */}
-                <div className="absolute inset-0 flex flex-col justify-end p-6 text-left opacity-0 transition-all duration-300 translate-y-4 group-hover:translate-y-0 group-hover:opacity-100">
+                <div className="absolute inset-0 flex flex-col justify-end p-6 text-left opacity-100 transition-all duration-300 translate-y-0 md:translate-y-4 md:opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
                   <h3 className="font-serif text-xl sm:text-2xl font-bold text-white mb-2">
                     {post.title}
                   </h3>

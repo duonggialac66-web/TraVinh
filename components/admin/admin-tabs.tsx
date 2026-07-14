@@ -18,18 +18,19 @@ import {
   removeProductAction,
 } from "@/app/admin/actions"
 import type { LandingData } from "@/lib/content"
+import { ShoppingCart, MapPin, Tent, Utensils, Compass, Package, Settings, ChevronRight, Image as ImageIcon } from "lucide-react"
 
 const tabs = [
-  { id: "content", label: "Nội dung chung" },
-  { id: "orders", label: "Đơn hàng mới" },
-  { id: "locations", label: "Địa điểm" },
-  { id: "festivals", label: "Văn hóa & lễ hội" },
-  { id: "foods", label: "Ẩm thực" },
-  { id: "tours", label: "Tour du lịch" },
-  { id: "products", label: "Đặc sản (Shop)" },
+  { id: "orders", label: "Quản lý đơn hàng", icon: ShoppingCart, desc: "Đơn mua hàng & Đặt tour" },
+  { id: "locations", label: "Địa điểm", icon: MapPin, desc: "Danh thắng Trà Vinh" },
+  { id: "festivals", label: "Văn hóa", icon: Tent, desc: "Bài viết văn hóa, lễ hội" },
+  { id: "foods", label: "Ẩm thực", icon: Utensils, desc: "Các món ngon đặc sản" },
+  { id: "tours", label: "Tour du lịch", icon: Compass, desc: "Lịch trình trải nghiệm" },
+  { id: "products", label: "Sản phẩm", icon: Package, desc: "Đặc sản làm quà (Shop)" },
+  { id: "gallery", label: "Thư viện ảnh", icon: ImageIcon, desc: "Hình ảnh trưng bày" },
+  { id: "content", label: "Cấu hình chung", icon: Settings, desc: "Cài đặt thông tin website" },
 ] as const
 
-// ... (keep fields same)
 const placeFields: CollectionField[] = [
   { name: "title", label: "Tên" },
   { name: "description", label: "Mô tả ngắn", type: "textarea" },
@@ -38,7 +39,6 @@ const placeFields: CollectionField[] = [
   { name: "tag", label: "Nhãn (tag)" },
   { name: "order", label: "Thứ tự", type: "number" },
 ]
-
 
 const festivalFields: CollectionField[] = [
   { name: "title", label: "Tên" },
@@ -80,71 +80,99 @@ const productFields: CollectionField[] = [
 ]
 
 export function AdminTabs({ data, orders = [] }: { data: LandingData, orders?: any[] }) {
-  const [active, setActive] = useState<(typeof tabs)[number]["id"]>("content")
+  const [active, setActive] = useState<(typeof tabs)[number]["id"]>("orders")
 
   return (
-    <div>
-      <div className="flex flex-wrap gap-2">
-        {tabs.map((t) => (
-          <button
-            key={t.id}
-            onClick={() => setActive(t.id)}
-            className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-              active === t.id
-                ? "bg-primary text-primary-foreground"
-                : "border border-border bg-card text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            {t.label}
-          </button>
-        ))}
+    <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
+      {/* Sidebar Navigation */}
+      <div className="w-full lg:w-72 shrink-0">
+        <div className="sticky top-10 flex flex-col gap-2">
+          <h2 className="mb-4 font-serif text-xl font-medium px-4 text-[#1A1A1A]">Bảng điều khiển</h2>
+          {tabs.map((t) => {
+            const Icon = t.icon;
+            const isActive = active === t.id;
+            return (
+              <button
+                key={t.id}
+                onClick={() => setActive(t.id)}
+                className={`group flex w-full items-center justify-between rounded-2xl px-4 py-3.5 text-left transition-all duration-300 ${
+                  isActive
+                    ? "bg-white shadow-md shadow-black/[0.03] border border-[#1A1A1A]/10"
+                    : "border border-transparent hover:bg-white/60 text-[#1A1A1A]/60 hover:text-[#1A1A1A]"
+                }`}
+              >
+                <div className="flex items-center gap-4">
+                  <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-colors ${isActive ? "bg-primary text-white" : "bg-[#1A1A1A]/5 text-[#1A1A1A]/50 group-hover:bg-[#1A1A1A]/10 group-hover:text-[#1A1A1A]"}`}>
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <div className={`text-sm font-semibold tracking-wide ${isActive ? "text-[#1A1A1A]" : ""}`}>{t.label}</div>
+                    <div className={`text-[11px] mt-0.5 font-medium ${isActive ? "text-primary" : "text-[#1A1A1A]/40 group-hover:text-[#1A1A1A]/60"}`}>{t.desc}</div>
+                  </div>
+                </div>
+                <ChevronRight className={`h-4 w-4 shrink-0 transition-transform duration-300 ${isActive ? "translate-x-1 opacity-100 text-primary" : "opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0"}`} />
+              </button>
+            )
+          })}
+        </div>
       </div>
 
-      <div className="mt-8">
-        {active === "content" ? <SiteContentPanel content={data.content} /> : null}
+      {/* Main Content Area */}
+      <div className="flex-1 w-full min-w-0">
+        {active === "content" ? (
+          <div className="rounded-3xl border border-[#1A1A1A]/5 bg-white p-6 sm:p-10 shadow-xl shadow-black/[0.02]">
+            <h2 className="mb-8 font-serif text-3xl font-medium">Cấu hình chung website</h2>
+            <SiteContentPanel content={data.content} />
+          </div>
+        ) : null}
         
         {active === "orders" ? (
-          <div className="rounded-3xl border border-border bg-card p-6 shadow-sm">
-            <h2 className="mb-6 font-serif text-2xl font-semibold">Quản lý Đơn hàng & Tour</h2>
+          <div className="rounded-3xl border border-[#1A1A1A]/5 bg-white p-6 sm:p-10 shadow-xl shadow-black/[0.02]">
+            <h2 className="mb-2 font-serif text-3xl font-medium text-[#1A1A1A]">Đơn hàng & Đặt Tour</h2>
+            <p className="mb-8 text-sm text-[#1A1A1A]/50 font-medium tracking-wide">Quản lý và theo dõi trạng thái các yêu cầu từ khách hàng.</p>
+            
             {orders.length === 0 ? (
-              <p className="text-muted-foreground">Chưa có đơn hàng nào.</p>
+              <div className="flex h-48 flex-col items-center justify-center rounded-3xl border border-dashed border-[#1A1A1A]/10 bg-[#F9F8F6] text-gray-500">
+                <ShoppingCart className="mb-3 h-10 w-10 opacity-20" />
+                <p className="font-medium">Chưa có đơn hàng nào.</p>
+              </div>
             ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-sm">
-                  <thead className="border-b border-border text-muted-foreground">
+              <div className="overflow-x-auto rounded-2xl border border-[#1A1A1A]/5">
+                <table className="w-full text-left text-sm whitespace-nowrap">
+                  <thead className="bg-[#F9F8F6] text-[#1A1A1A]/60 uppercase tracking-widest text-xs font-semibold">
                     <tr>
-                      <th className="pb-3 pr-4 font-medium">Mã ĐH</th>
-                      <th className="pb-3 pr-4 font-medium">Khách hàng</th>
-                      <th className="pb-3 pr-4 font-medium">Loại</th>
-                      <th className="pb-3 pr-4 font-medium">Chi tiết mặt hàng</th>
-                      <th className="pb-3 pr-4 font-medium">Tổng tiền</th>
-                      <th className="pb-3 pr-4 font-medium">Ngày đặt</th>
-                      <th className="pb-3 font-medium">Trạng thái</th>
+                      <th className="py-4 px-5">Mã ĐH</th>
+                      <th className="py-4 px-5">Khách hàng</th>
+                      <th className="py-4 px-5">Loại</th>
+                      <th className="py-4 px-5">Chi tiết</th>
+                      <th className="py-4 px-5">Tổng tiền</th>
+                      <th className="py-4 px-5">Ngày đặt</th>
+                      <th className="py-4 px-5">Trạng thái</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-border">
+                  <tbody className="divide-y divide-[#1A1A1A]/5 bg-white">
                     {orders.map((order) => (
-                      <tr key={order.id} className="hover:bg-muted/50">
-                        <td className="py-4 pr-4 text-xs font-mono">{order.id.slice(-6).toUpperCase()}</td>
-                        <td className="py-4 pr-4">
-                          <div className="font-medium text-foreground">{order.user?.name || "Khách"}</div>
-                          <div className="text-xs text-muted-foreground">{order.user?.email || ""}</div>
+                      <tr key={order.id} className="transition-colors hover:bg-[#F9F8F6]/50">
+                        <td className="py-4 px-5 text-xs font-mono font-medium text-[#1A1A1A]/70">{order.id.slice(-6).toUpperCase()}</td>
+                        <td className="py-4 px-5">
+                          <div className="font-semibold text-[#1A1A1A]">{order.user?.name || "Khách"}</div>
+                          <div className="text-xs text-[#1A1A1A]/50 mt-0.5">{order.user?.email || ""}</div>
                         </td>
-                        <td className="py-4 pr-4">
-                          <span className={`rounded-full px-2 py-1 text-xs font-medium ${order._type === 'TOUR' ? 'bg-primary/10 text-primary' : 'bg-accent/20 text-accent-foreground'}`}>
+                        <td className="py-4 px-5">
+                          <span className={`inline-flex items-center rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest ${order._type === 'TOUR' ? 'bg-primary/10 text-primary' : 'bg-[#1A1A1A]/10 text-[#1A1A1A]'}`}>
                             {order._type}
                           </span>
                         </td>
-                        <td className="py-4 pr-4 max-w-[250px]">
+                        <td className="py-4 px-5 max-w-[200px] whitespace-normal">
                           {order._type === 'TOUR' ? (
                             <div>
-                              <div className="font-medium truncate" title={order.tourName}>{order.tourName}</div>
-                              <div className="text-xs text-muted-foreground mt-1">
+                              <div className="font-medium text-[#1A1A1A] line-clamp-1" title={order.tourName}>{order.tourName}</div>
+                              <div className="text-xs text-primary font-semibold mt-1">
                                 Đi ngày: {order.tourDate} • {order.participants} người
                               </div>
                             </div>
                           ) : (
-                            <ul className="list-disc pl-4 text-xs text-muted-foreground">
+                            <ul className="list-inside list-disc text-xs text-[#1A1A1A]/70 font-medium line-clamp-2">
                               {order.items?.map((item: any) => (
                                 <li key={item.id} className="truncate" title={item.productName}>
                                   {item.productName} (x{item.quantity})
@@ -153,15 +181,15 @@ export function AdminTabs({ data, orders = [] }: { data: LandingData, orders?: a
                             </ul>
                           )}
                         </td>
-                        <td className="py-4 pr-4 font-medium">
+                        <td className="py-4 px-5 font-semibold text-primary">
                           {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(order.totalAmount)}
                         </td>
-                        <td className="py-4 pr-4 text-muted-foreground">
+                        <td className="py-4 px-5 text-xs font-medium text-[#1A1A1A]/50">
                           {new Date(order.createdAt).toLocaleDateString("vi-VN")}
                         </td>
-                        <td className="py-4">
+                        <td className="py-4 px-5">
                           <select 
-                            className="rounded-lg border border-border bg-background px-3 py-1.5 text-sm outline-none"
+                            className="rounded-xl border border-[#1A1A1A]/10 bg-[#F9F8F6] px-3 py-2 text-xs font-semibold outline-none transition-colors hover:border-[#1A1A1A]/30 focus:border-primary"
                             defaultValue={order.status}
                           >
                             <option value="PENDING">Chờ xử lý</option>
@@ -194,7 +222,7 @@ export function AdminTabs({ data, orders = [] }: { data: LandingData, orders?: a
             fields={festivalFields}
             saveAction={saveFestivalAction}
             deleteAction={removeFestivalAction}
-            labelSingular="lễ hội"
+            labelSingular="bài viết văn hóa"
           />
         ) : null}
         {active === "foods" ? (
@@ -212,7 +240,7 @@ export function AdminTabs({ data, orders = [] }: { data: LandingData, orders?: a
             fields={galleryFields}
             saveAction={saveGalleryAction}
             deleteAction={removeGalleryAction}
-            labelSingular="ảnh"
+            labelSingular="hình ảnh"
           />
         ) : null}
         {active === "tours" ? (
@@ -221,7 +249,7 @@ export function AdminTabs({ data, orders = [] }: { data: LandingData, orders?: a
             fields={tourFields}
             saveAction={saveTourAction}
             deleteAction={removeTourAction}
-            labelSingular="tour"
+            labelSingular="tour du lịch"
           />
         ) : null}
         {active === "products" ? (

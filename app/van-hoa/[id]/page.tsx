@@ -29,9 +29,33 @@ export default async function CulturePostPage({ params }: { params: Promise<{ id
       <div className="relative z-10">
         <Navbar />
       
-      <article className="pt-20 sm:pt-24">
-        {/* Header Hero */}
-        <header className="relative h-[50vh] min-h-[400px] w-full bg-secondary">
+      <article className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 pt-32 pb-16">
+        <div className="mb-8">
+          <Link 
+            href="/#van-hoa"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors font-medium"
+          >
+            <ArrowLeft className="size-4" /> Quay lại trang chủ
+          </Link>
+        </div>
+        
+        <div className="mb-10">
+          {post.season && (
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
+              <Calendar className="size-4" />
+              {post.season}
+            </div>
+          )}
+          
+          <h1 className="font-serif text-4xl font-bold leading-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl mb-6">
+            {post.title}
+          </h1>
+          <p className="text-xl text-muted-foreground leading-relaxed font-medium max-w-3xl">
+            {post.description}
+          </p>
+        </div>
+
+        <div className="relative aspect-[16/9] w-full mb-12 rounded-3xl overflow-hidden shadow-lg border border-border/50">
           <Image
             src={post.image || "/placeholder.svg"}
             alt={post.title}
@@ -39,38 +63,14 @@ export default async function CulturePostPage({ params }: { params: Promise<{ id
             className="object-cover"
             priority
           />
-          {/* Gradients to blend image with background color */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#F9F8F6] via-[#F9F8F6]/40 to-black/30" />
-          
-          <div className="absolute inset-0 mx-auto flex max-w-4xl flex-col justify-end px-5 pb-12 sm:pb-20">
-            <Link 
-              href="/#van-hoa"
-              className="mb-8 inline-flex w-fit items-center gap-2 rounded-full border border-border/50 bg-background/50 px-4 py-2 text-sm font-medium text-foreground backdrop-blur-md transition-all hover:bg-background hover:scale-105"
-            >
-              <ArrowLeft className="size-4" />
-              Quay lại trang chủ
-            </Link>
-            
-            {post.season && (
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary/90 px-4 py-1.5 text-sm font-semibold text-primary-foreground shadow-lg backdrop-blur-md">
-                <Calendar className="size-4" />
-                {post.season}
-              </div>
-            )}
-            
-            <h1 className="font-serif text-4xl font-bold leading-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
-              {post.title}
-            </h1>
-          </div>
-        </header>
+        </div>
 
-        {/* Content Body */}
-        <div className="mx-auto max-w-3xl px-5 py-12 sm:py-24">
+        <div className="mx-auto max-w-5xl">
           <div className="prose prose-lg prose-slate dark:prose-invert max-w-none">
             {post.content ? (
               <div 
                 dangerouslySetInnerHTML={{ __html: post.content }} 
-                className="blog-content [&_img]:max-w-full [&_img]:h-auto [&_img]:rounded-xl [&_img]:mx-auto [&_img]:my-10 [&_img]:shadow-lg [&_p]:break-words [&_p]:mb-5 [&_p]:leading-relaxed" 
+                className="blog-content [&_img]:max-w-full [&_img]:w-full [&_img]:h-auto [&_img]:rounded-3xl [&_img]:border [&_img]:border-border [&_img]:shadow-md [&_img]:my-10 [&_img]:object-cover [&_p]:break-words [&_p]:mb-6 [&_p]:leading-relaxed [&_h2]:mt-12 [&_h2]:mb-6 [&_h2]:text-3xl [&_h2]:font-semibold [&_h2]:text-primary [&_h3]:mt-10 [&_h3]:mb-4 [&_h3]:text-2xl [&_h3]:font-medium" 
               />
             ) : (
               <>

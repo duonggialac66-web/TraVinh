@@ -52,29 +52,39 @@ export function Locations({ locations }: { locations: Location[] }) {
           </motion.div>
         </div>
 
-        <div className="flex flex-col lg:flex-row lg:h-[75vh] lg:min-h-[600px] w-full gap-4">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 0.1
+              }
+            }
+          }}
+          className="flex flex-col lg:flex-row lg:h-[75vh] lg:min-h-[600px] w-full gap-4"
+        >
           {locations.map((loc, i) => (
             <motion.div
               key={loc.id}
-              initial={{ opacity: 0, y: 200, scale: 0.85, rotateX: 15, rotateZ: i % 2 === 0 ? -2 : 2 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0, rotateZ: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ 
-                duration: 1.4, 
-                delay: i * 0.15, 
-                ease: [0.16, 1, 0.3, 1] // Dramatic ease out
+              variants={{
+                hidden: { opacity: 0, y: 50, scale: 0.95 },
+                visible: { opacity: 1, y: 0, scale: 1 }
               }}
-              className="group relative flex-1 min-h-[300px] sm:min-h-[400px] lg:min-h-0 overflow-hidden rounded-[2rem] bg-zinc-900 transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] lg:hover:flex-[4] lg:focus-within:flex-[4] origin-bottom perspective-[1000px]"
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="group relative flex-1 min-h-[350px] sm:min-h-[400px] lg:min-h-0 overflow-hidden rounded-[2rem] bg-zinc-900 transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] lg:hover:flex-[4] lg:focus-within:flex-[4] origin-bottom perspective-[1000px]"
             >
-              <Link href={`/dia-diem/${loc.id}`} className="block h-full w-full relative">
+              <Link href={`/dia-diem/${loc.id}`} className="absolute inset-0 block">
                 <Image
                   src={loc.image || "/placeholder.svg"}
                   alt={loc.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover opacity-60 grayscale-[30%] transition-all duration-1000 group-hover:scale-105 group-hover:opacity-100 group-hover:grayscale-0"
                 />
                 {/* Dark gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 transition-opacity duration-700 group-hover:opacity-60" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 transition-opacity duration-700 group-hover:opacity-60" />
                 
                 {/* Collapsed State: Vertical Text (Visible on desktop when not hovered) */}
                 <div className="absolute inset-0 hidden flex-col items-center justify-end p-8 lg:flex lg:opacity-100 lg:group-hover:opacity-0 transition-opacity duration-500">
@@ -92,8 +102,8 @@ export function Locations({ locations }: { locations: Location[] }) {
                   </div>
                   
                   <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
-                    <div>
-                      <h3 className="font-serif text-3xl font-medium text-white sm:text-4xl">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-serif text-3xl font-medium text-white sm:text-4xl break-words">
                         {loc.title}
                       </h3>
                       <p className="mt-3 max-w-md text-sm font-light leading-relaxed text-white/70 line-clamp-2">
@@ -108,7 +118,7 @@ export function Locations({ locations }: { locations: Location[] }) {
               </Link>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

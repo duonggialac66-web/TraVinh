@@ -30,48 +30,52 @@ export default async function AdminPage() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-5 py-10">
-      <header className="flex flex-wrap items-center justify-between gap-4 border-b border-border pb-6">
-        <div>
-          <span className="text-sm font-medium uppercase tracking-[0.2em] text-accent">
-            Bảng quản trị
-          </span>
-          <h1 className="mt-1 font-serif text-3xl font-semibold text-foreground">
-            Nội dung trang Trà Vinh
-          </h1>
-        </div>
-        <div className="flex items-center gap-3">
-          <Link
-            href="/"
-            target="_blank"
-            className="rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-accent"
-          >
-            Xem trang landing
-          </Link>
-          <form action={logoutAction}>
-            <button
-              type="submit"
-              suppressHydrationWarning
-              className="rounded-full bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground transition-colors hover:opacity-90"
+    <div className="min-h-screen bg-[#F9F8F6] text-[#1A1A1A] font-sans">
+      <div className="mx-auto max-w-[1400px]">
+        <header className="flex flex-wrap items-center justify-between gap-4 px-5 py-8 md:px-10 lg:py-10">
+          <div className="flex items-center gap-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-xl font-serif text-white shadow-lg shadow-primary/20">
+              TV
+            </div>
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-widest text-primary/80">
+                Trang quản trị
+              </span>
+              <h1 className="mt-0.5 font-serif text-2xl font-medium text-[#1A1A1A]">
+                Trà Vinh <span className="italic text-primary">Studio</span>
+              </h1>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/"
+              target="_blank"
+              className="flex items-center gap-2 rounded-full border border-[#1A1A1A]/10 bg-white px-5 py-2.5 text-sm font-medium text-[#1A1A1A] transition-colors hover:border-[#1A1A1A]/30 hover:bg-gray-50"
             >
-              Đăng xuất
-            </button>
-          </form>
-        </div>
-      </header>
+              Xem trang đích
+            </Link>
+            <form action={logoutAction}>
+              <button
+                type="submit"
+                suppressHydrationWarning
+                className="flex items-center gap-2 rounded-full bg-[#1A1A1A] px-5 py-2.5 text-sm font-medium text-white shadow-lg transition-all hover:bg-primary"
+              >
+                Đăng xuất
+              </button>
+            </form>
+          </div>
+        </header>
 
-      {data.usingFallback ? (
-        <div className="mt-6 rounded-3xl border border-accent/40 bg-accent/10 px-5 py-4 text-sm leading-relaxed text-foreground">
-          <strong className="font-semibold">Chưa kết nối cơ sở dữ liệu.</strong> Bạn đang xem dữ
-          liệu mẫu — mọi chỉnh sửa sẽ chưa được lưu lại. Hãy thêm biến{" "}
-          <code className="rounded bg-muted px-1">DATABASE_URL</code> của Neon, rồi chạy{" "}
-          <code className="rounded bg-muted px-1">pnpm db:push</code> và{" "}
-          <code className="rounded bg-muted px-1">pnpm db:seed</code> để bật tính năng lưu.
-        </div>
-      ) : null}
+        <div className="px-5 pb-16 md:px-10">
+          {data.usingFallback ? (
+            <div className="mb-10 rounded-2xl border border-amber-200 bg-amber-50 px-6 py-4 text-sm leading-relaxed text-amber-800 shadow-sm">
+              <strong className="font-semibold text-amber-900">Chưa kết nối cơ sở dữ liệu.</strong> Bạn đang xem dữ
+              liệu mẫu — mọi chỉnh sửa sẽ chưa được lưu lại. Hãy thêm biến <code className="rounded bg-white px-1.5 py-0.5 font-mono shadow-sm">DATABASE_URL</code> của Neon.
+            </div>
+          ) : null}
 
-      <div className="mt-8">
-        <AdminTabsWrapper data={data} orders={orders} />
+          <AdminTabsWrapper data={data} orders={orders} />
+        </div>
       </div>
     </div>
   )

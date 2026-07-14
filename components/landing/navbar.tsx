@@ -22,6 +22,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [isHome, setIsHome] = useState(true)
   
   const { carts, activeUser, setActiveUser, setIsOpen: setCartOpen } = useCartStore()
 
@@ -36,6 +37,7 @@ export function Navbar() {
   }, [session, setActiveUser])
 
   useEffect(() => {
+    setIsHome(window.location.pathname === '/')
     const onScroll = () => setScrolled(window.scrollY > 40)
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
@@ -44,6 +46,8 @@ export function Navbar() {
 
   const currentItems = mounted ? (carts[activeUser] || []) : []
   const cartCount = currentItems.reduce((sum, item) => sum + item.quantity, 0)
+  
+  const isLight = !isHome || scrolled
 
   return (
     <motion.header
@@ -54,7 +58,7 @@ export function Navbar() {
     >
       <nav
         className={`flex w-full max-w-5xl items-center justify-between rounded-full border px-5 py-2.5 transition-all duration-500 ${
-          scrolled
+          isLight
             ? "border-border bg-background/90 shadow-lg shadow-primary/5 backdrop-blur-xl"
             : "border-transparent bg-transparent"
         }`}
@@ -69,7 +73,7 @@ export function Navbar() {
             />
           </div>
           <span className={`hidden sm:inline-block font-serif text-lg font-semibold tracking-tight transition-colors ${
-            scrolled ? "text-foreground" : "text-primary-foreground"
+            isLight ? "text-foreground" : "text-primary-foreground"
           }`}>
             Trà Vinh
           </span>
@@ -80,8 +84,8 @@ export function Navbar() {
             <a
               key={l.href}
               href={l.href}
-              className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors hover:bg-secondary hover:text-secondary-foreground ${
-                scrolled ? "text-muted-foreground" : "text-primary-foreground/90"
+              className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors hover:bg-secondary hover:text-foreground ${
+                isLight ? "text-foreground/80" : "text-primary-foreground/90"
               }`}
             >
               {l.label}
@@ -94,7 +98,7 @@ export function Navbar() {
             <button
               onClick={() => setCartOpen(true)}
               className={`relative grid size-9 place-items-center rounded-full transition-colors mr-2 ${
-                scrolled ? "hover:bg-secondary text-foreground" : "hover:bg-white/10 text-primary-foreground"
+                isLight ? "hover:bg-secondary text-foreground" : "hover:bg-white/10 text-primary-foreground"
               }`}
             >
               <ShoppingBag className="size-5" />
@@ -108,7 +112,7 @@ export function Navbar() {
 
           {session ? (
             <div className="hidden items-center gap-2 md:flex">
-              <span className="text-sm font-medium text-foreground">{session.user?.name}</span>
+              <span className={`text-sm font-medium ${isLight ? "text-foreground" : "text-primary-foreground"}`}>{session.user?.name}</span>
               <button
                 onClick={() => signOut()}
                 className="rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition-transform hover:scale-105"
@@ -127,7 +131,7 @@ export function Navbar() {
           <button
             onClick={() => setOpen((v) => !v)}
             className={`grid size-9 place-items-center rounded-full border transition-colors md:hidden ${
-              scrolled
+              isLight
                 ? "border-border bg-background/70 text-foreground"
                 : "border-primary-foreground/20 bg-transparent text-primary-foreground"
             }`}
