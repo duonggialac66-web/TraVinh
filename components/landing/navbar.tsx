@@ -161,6 +161,33 @@ export function Navbar() {
                   {l.label}
                 </a>
               ))}
+              
+              <div className="my-2 h-px w-full bg-border" />
+              
+              {session ? (
+                <div className="flex flex-col gap-1">
+                  <div className="px-4 py-2 text-sm font-medium text-foreground/70">
+                    Xin chào, {session.user?.name}
+                  </div>
+                  <button
+                    onClick={() => {
+                      setOpen(false)
+                      signOut()
+                    }}
+                    className="rounded-2xl bg-accent px-4 py-3 text-left text-base font-medium text-accent-foreground transition-colors hover:bg-accent/90"
+                  >
+                    Đăng xuất
+                  </button>
+                </div>
+              ) : (
+                <a
+                  href="/dang-nhap"
+                  onClick={() => setOpen(false)}
+                  className="rounded-2xl bg-accent px-4 py-3 text-center text-base font-medium text-accent-foreground transition-colors hover:bg-accent/90"
+                >
+                  Đăng nhập
+                </a>
+              )}
             </div>
           </motion.div>
         )}
