@@ -19,7 +19,7 @@ export default async function Page() {
       <Navbar />
       <Hero content={content} />
       <About content={content} />
-      <Locations locations={locations} />
+      <Locations locations={locations} mapImage={content.locationMapImage} />
       <Tours tours={tours} />
       <Foods foods={foods} />
       <Products products={products} />

@@ -38,6 +38,10 @@ const placeFields: CollectionField[] = [
   { name: "image", label: "Đường dẫn ảnh/video" },
   { name: "tag", label: "Nhãn (tag)" },
   { name: "order", label: "Thứ tự", type: "number" },
+  { name: "mapTop", label: "Ghim định vị trên bản đồ", type: "map_picker" },
+  { name: "floatingImage1", label: "Ảnh bay 1 (tùy chọn)", type: "image" },
+  { name: "floatingImage2", label: "Ảnh bay 2 (tùy chọn)", type: "image" },
+  { name: "floatingImage3", label: "Ảnh bay 3 (tùy chọn)", type: "image" },
 ]
 
 const festivalFields: CollectionField[] = [
@@ -214,6 +218,7 @@ export function AdminTabs({ data, orders = [] }: { data: LandingData, orders?: a
             saveAction={saveLocationAction}
             deleteAction={removeLocationAction}
             labelSingular="địa điểm"
+            mapImage={data.content.locationMapImage}
           />
         ) : null}
         {active === "festivals" ? (

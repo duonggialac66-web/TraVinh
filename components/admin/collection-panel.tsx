@@ -4,12 +4,13 @@ import { useActionState, useState } from "react"
 import { useFormStatus } from "react-dom"
 import { RichTextEditor } from "./rich-text-editor"
 import { MediaUpload } from "./media-upload"
+import { MapPicker } from "./map-picker"
 import { Plus, Trash2, Save, X, Edit3, Image as ImageIcon, ChevronUp } from "lucide-react"
 
 export type CollectionField = {
   name: string
   label: string
-  type?: "text" | "textarea" | "number" | "richtext" | "image"
+  type?: "text" | "textarea" | "number" | "richtext" | "image" | "map_picker"
 }
 
 type SaveAction = (
@@ -19,7 +20,7 @@ type SaveAction = (
 
 type DeleteAction = (formData: FormData) => Promise<void>
 
-type Item = Record<string, string | number>
+type Item = Record<string, string | number | null | undefined>
 
 function SaveButton({ label, isNew }: { label: string, isNew?: boolean }) {
   const { pending } = useFormStatus()
@@ -47,6 +48,7 @@ function ItemForm({
   isNew,
   onSaved,
   onCancel,
+  mapImage,
 }: {
   item: Item
   fields: CollectionField[]
@@ -55,6 +57,7 @@ function ItemForm({
   isNew?: boolean
   onSaved?: () => void
   onCancel?: () => void
+  mapImage?: string
 }) {
   const [isExpanded, setIsExpanded] = useState(isNew ? true : false)
   
@@ -132,7 +135,7 @@ function ItemForm({
             {fields.map((f) => (
               <div 
                 key={f.name} 
-                className={`flex flex-col gap-2 ${f.type === 'richtext' || f.type === 'textarea' || f.name === 'title' ? 'md:col-span-2' : 'col-span-1'}`}
+                className={`flex flex-col gap-2 ${f.type === 'richtext' || f.type === 'textarea' || f.name === 'title' || f.type === 'map_picker' ? 'md:col-span-2' : 'col-span-1'}`}
               >
                 <label className="text-xs font-bold uppercase tracking-widest text-[#1A1A1A]/60">
                   {f.label}
@@ -142,6 +145,12 @@ function ItemForm({
                   <div className="overflow-hidden rounded-2xl border border-[#1A1A1A]/10 bg-white">
                     <RichTextEditor name={f.name} defaultValue={String(item[f.name] ?? "")} />
                   </div>
+                ) : f.type === "map_picker" ? (
+                  <MapPicker 
+                    mapImage={mapImage || "/images/map.jpg"} 
+                    defaultTop={item.mapTop ? Number(item.mapTop) : undefined} 
+                    defaultLeft={item.mapLeft ? Number(item.mapLeft) : undefined} 
+                  />
                 ) : f.type === "image" || f.name === "image" ? (
                   <MediaUpload name={f.name} defaultValue={String(item[f.name] ?? "")} />
                 ) : f.type === "textarea" ? (
@@ -192,16 +201,13 @@ function ItemForm({
               ) : null}
 
               {!isNew && (
-                <form action={deleteAction} className="ml-auto">
-                  <input type="hidden" name="id" defaultValue={String(item.id ?? "")} />
-                  <button
-                    type="submit"
-                    className="group flex items-center gap-2 rounded-xl border border-red-100 bg-red-50 px-4 py-2.5 text-sm font-medium text-red-600 transition-colors hover:bg-red-500 hover:text-white"
-                  >
-                    <Trash2 className="h-4 w-4 transition-transform group-hover:scale-110" />
-                    <span className="hidden sm:inline">Xóa</span>
-                  </button>
-                </form>
+                <button
+                  formAction={deleteAction}
+                  className="group ml-auto flex items-center gap-2 rounded-xl border border-red-100 bg-red-50 px-4 py-2.5 text-sm font-medium text-red-600 transition-colors hover:bg-red-500 hover:text-white"
+                >
+                  <Trash2 className="h-4 w-4 transition-transform group-hover:scale-110" />
+                  <span className="hidden sm:inline">Xóa</span>
+                </button>
               )}
             </div>
           </div>
@@ -226,12 +232,14 @@ export function CollectionPanel({
   saveAction,
   deleteAction,
   labelSingular,
+  mapImage,
 }: {
   items: Item[]
   fields: CollectionField[]
   saveAction: SaveAction
   deleteAction: DeleteAction
   labelSingular: string
+  mapImage?: string
 }) {
   const [showNew, setShowNew] = useState(false)
   const emptyItem: Item = Object.fromEntries(fields.map((f) => [f.name, ""]))
@@ -269,6 +277,7 @@ export function CollectionPanel({
               isNew
               onSaved={() => setShowNew(false)}
               onCancel={() => setShowNew(false)}
+              mapImage={mapImage}
             />
           </div>
         )}
@@ -281,6 +290,7 @@ export function CollectionPanel({
               fields={fields}
               saveAction={saveAction}
               deleteAction={deleteAction}
+              mapImage={mapImage}
             />
           ))}
         </div>

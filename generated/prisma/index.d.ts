@@ -2150,6 +2150,7 @@ export namespace Prisma {
     heroSubtitle: string | null
     heroImage: string | null
     logoImage: string | null
+    locationMapImage: string | null
     aboutHeading: string | null
     aboutBody: string | null
     contactHeading: string | null
@@ -2167,6 +2168,7 @@ export namespace Prisma {
     heroSubtitle: string | null
     heroImage: string | null
     logoImage: string | null
+    locationMapImage: string | null
     aboutHeading: string | null
     aboutBody: string | null
     contactHeading: string | null
@@ -2184,6 +2186,7 @@ export namespace Prisma {
     heroSubtitle: number
     heroImage: number
     logoImage: number
+    locationMapImage: number
     aboutHeading: number
     aboutBody: number
     contactHeading: number
@@ -2203,6 +2206,7 @@ export namespace Prisma {
     heroSubtitle?: true
     heroImage?: true
     logoImage?: true
+    locationMapImage?: true
     aboutHeading?: true
     aboutBody?: true
     contactHeading?: true
@@ -2220,6 +2224,7 @@ export namespace Prisma {
     heroSubtitle?: true
     heroImage?: true
     logoImage?: true
+    locationMapImage?: true
     aboutHeading?: true
     aboutBody?: true
     contactHeading?: true
@@ -2237,6 +2242,7 @@ export namespace Prisma {
     heroSubtitle?: true
     heroImage?: true
     logoImage?: true
+    locationMapImage?: true
     aboutHeading?: true
     aboutBody?: true
     contactHeading?: true
@@ -2327,6 +2333,7 @@ export namespace Prisma {
     heroSubtitle: string
     heroImage: string
     logoImage: string
+    locationMapImage: string
     aboutHeading: string
     aboutBody: string
     contactHeading: string
@@ -2361,6 +2368,7 @@ export namespace Prisma {
     heroSubtitle?: boolean
     heroImage?: boolean
     logoImage?: boolean
+    locationMapImage?: boolean
     aboutHeading?: boolean
     aboutBody?: boolean
     contactHeading?: boolean
@@ -2378,6 +2386,7 @@ export namespace Prisma {
     heroSubtitle?: boolean
     heroImage?: boolean
     logoImage?: boolean
+    locationMapImage?: boolean
     aboutHeading?: boolean
     aboutBody?: boolean
     contactHeading?: boolean
@@ -2395,6 +2404,7 @@ export namespace Prisma {
     heroSubtitle?: boolean
     heroImage?: boolean
     logoImage?: boolean
+    locationMapImage?: boolean
     aboutHeading?: boolean
     aboutBody?: boolean
     contactHeading?: boolean
@@ -2412,6 +2422,7 @@ export namespace Prisma {
     heroSubtitle?: boolean
     heroImage?: boolean
     logoImage?: boolean
+    locationMapImage?: boolean
     aboutHeading?: boolean
     aboutBody?: boolean
     contactHeading?: boolean
@@ -2422,7 +2433,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type SiteContentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "heroKicker" | "heroTitle" | "heroSubtitle" | "heroImage" | "logoImage" | "aboutHeading" | "aboutBody" | "contactHeading" | "contactBody" | "contactEmail" | "contactPhone" | "mapEmbedUrl" | "updatedAt", ExtArgs["result"]["siteContent"]>
+  export type SiteContentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "heroKicker" | "heroTitle" | "heroSubtitle" | "heroImage" | "logoImage" | "locationMapImage" | "aboutHeading" | "aboutBody" | "contactHeading" | "contactBody" | "contactEmail" | "contactPhone" | "mapEmbedUrl" | "updatedAt", ExtArgs["result"]["siteContent"]>
 
   export type $SiteContentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "SiteContent"
@@ -2434,6 +2445,7 @@ export namespace Prisma {
       heroSubtitle: string
       heroImage: string
       logoImage: string
+      locationMapImage: string
       aboutHeading: string
       aboutBody: string
       contactHeading: string
@@ -2871,6 +2883,7 @@ export namespace Prisma {
     readonly heroSubtitle: FieldRef<"SiteContent", 'String'>
     readonly heroImage: FieldRef<"SiteContent", 'String'>
     readonly logoImage: FieldRef<"SiteContent", 'String'>
+    readonly locationMapImage: FieldRef<"SiteContent", 'String'>
     readonly aboutHeading: FieldRef<"SiteContent", 'String'>
     readonly aboutBody: FieldRef<"SiteContent", 'String'>
     readonly contactHeading: FieldRef<"SiteContent", 'String'>
@@ -3259,10 +3272,14 @@ export namespace Prisma {
 
   export type LocationAvgAggregateOutputType = {
     order: number | null
+    mapTop: number | null
+    mapLeft: number | null
   }
 
   export type LocationSumAggregateOutputType = {
     order: number | null
+    mapTop: number | null
+    mapLeft: number | null
   }
 
   export type LocationMinAggregateOutputType = {
@@ -3273,6 +3290,11 @@ export namespace Prisma {
     image: string | null
     tag: string | null
     order: number | null
+    mapTop: number | null
+    mapLeft: number | null
+    floatingImage1: string | null
+    floatingImage2: string | null
+    floatingImage3: string | null
     createdAt: Date | null
   }
 
@@ -3284,6 +3306,11 @@ export namespace Prisma {
     image: string | null
     tag: string | null
     order: number | null
+    mapTop: number | null
+    mapLeft: number | null
+    floatingImage1: string | null
+    floatingImage2: string | null
+    floatingImage3: string | null
     createdAt: Date | null
   }
 
@@ -3295,6 +3322,11 @@ export namespace Prisma {
     image: number
     tag: number
     order: number
+    mapTop: number
+    mapLeft: number
+    floatingImage1: number
+    floatingImage2: number
+    floatingImage3: number
     createdAt: number
     _all: number
   }
@@ -3302,10 +3334,14 @@ export namespace Prisma {
 
   export type LocationAvgAggregateInputType = {
     order?: true
+    mapTop?: true
+    mapLeft?: true
   }
 
   export type LocationSumAggregateInputType = {
     order?: true
+    mapTop?: true
+    mapLeft?: true
   }
 
   export type LocationMinAggregateInputType = {
@@ -3316,6 +3352,11 @@ export namespace Prisma {
     image?: true
     tag?: true
     order?: true
+    mapTop?: true
+    mapLeft?: true
+    floatingImage1?: true
+    floatingImage2?: true
+    floatingImage3?: true
     createdAt?: true
   }
 
@@ -3327,6 +3368,11 @@ export namespace Prisma {
     image?: true
     tag?: true
     order?: true
+    mapTop?: true
+    mapLeft?: true
+    floatingImage1?: true
+    floatingImage2?: true
+    floatingImage3?: true
     createdAt?: true
   }
 
@@ -3338,6 +3384,11 @@ export namespace Prisma {
     image?: true
     tag?: true
     order?: true
+    mapTop?: true
+    mapLeft?: true
+    floatingImage1?: true
+    floatingImage2?: true
+    floatingImage3?: true
     createdAt?: true
     _all?: true
   }
@@ -3436,6 +3487,11 @@ export namespace Prisma {
     image: string
     tag: string
     order: number
+    mapTop: number | null
+    mapLeft: number | null
+    floatingImage1: string | null
+    floatingImage2: string | null
+    floatingImage3: string | null
     createdAt: Date
     _count: LocationCountAggregateOutputType | null
     _avg: LocationAvgAggregateOutputType | null
@@ -3466,6 +3522,11 @@ export namespace Prisma {
     image?: boolean
     tag?: boolean
     order?: boolean
+    mapTop?: boolean
+    mapLeft?: boolean
+    floatingImage1?: boolean
+    floatingImage2?: boolean
+    floatingImage3?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["location"]>
 
@@ -3477,6 +3538,11 @@ export namespace Prisma {
     image?: boolean
     tag?: boolean
     order?: boolean
+    mapTop?: boolean
+    mapLeft?: boolean
+    floatingImage1?: boolean
+    floatingImage2?: boolean
+    floatingImage3?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["location"]>
 
@@ -3488,6 +3554,11 @@ export namespace Prisma {
     image?: boolean
     tag?: boolean
     order?: boolean
+    mapTop?: boolean
+    mapLeft?: boolean
+    floatingImage1?: boolean
+    floatingImage2?: boolean
+    floatingImage3?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["location"]>
 
@@ -3499,10 +3570,15 @@ export namespace Prisma {
     image?: boolean
     tag?: boolean
     order?: boolean
+    mapTop?: boolean
+    mapLeft?: boolean
+    floatingImage1?: boolean
+    floatingImage2?: boolean
+    floatingImage3?: boolean
     createdAt?: boolean
   }
 
-  export type LocationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "content" | "image" | "tag" | "order" | "createdAt", ExtArgs["result"]["location"]>
+  export type LocationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "content" | "image" | "tag" | "order" | "mapTop" | "mapLeft" | "floatingImage1" | "floatingImage2" | "floatingImage3" | "createdAt", ExtArgs["result"]["location"]>
 
   export type $LocationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Location"
@@ -3515,6 +3591,11 @@ export namespace Prisma {
       image: string
       tag: string
       order: number
+      mapTop: number | null
+      mapLeft: number | null
+      floatingImage1: string | null
+      floatingImage2: string | null
+      floatingImage3: string | null
       createdAt: Date
     }, ExtArgs["result"]["location"]>
     composites: {}
@@ -3946,6 +4027,11 @@ export namespace Prisma {
     readonly image: FieldRef<"Location", 'String'>
     readonly tag: FieldRef<"Location", 'String'>
     readonly order: FieldRef<"Location", 'Int'>
+    readonly mapTop: FieldRef<"Location", 'Float'>
+    readonly mapLeft: FieldRef<"Location", 'Float'>
+    readonly floatingImage1: FieldRef<"Location", 'String'>
+    readonly floatingImage2: FieldRef<"Location", 'String'>
+    readonly floatingImage3: FieldRef<"Location", 'String'>
     readonly createdAt: FieldRef<"Location", 'DateTime'>
   }
     
@@ -4327,10 +4413,14 @@ export namespace Prisma {
 
   export type FestivalAvgAggregateOutputType = {
     order: number | null
+    mapTop: number | null
+    mapLeft: number | null
   }
 
   export type FestivalSumAggregateOutputType = {
     order: number | null
+    mapTop: number | null
+    mapLeft: number | null
   }
 
   export type FestivalMinAggregateOutputType = {
@@ -4341,6 +4431,8 @@ export namespace Prisma {
     image: string | null
     season: string | null
     order: number | null
+    mapTop: number | null
+    mapLeft: number | null
     createdAt: Date | null
   }
 
@@ -4352,6 +4444,8 @@ export namespace Prisma {
     image: string | null
     season: string | null
     order: number | null
+    mapTop: number | null
+    mapLeft: number | null
     createdAt: Date | null
   }
 
@@ -4363,6 +4457,8 @@ export namespace Prisma {
     image: number
     season: number
     order: number
+    mapTop: number
+    mapLeft: number
     createdAt: number
     _all: number
   }
@@ -4370,10 +4466,14 @@ export namespace Prisma {
 
   export type FestivalAvgAggregateInputType = {
     order?: true
+    mapTop?: true
+    mapLeft?: true
   }
 
   export type FestivalSumAggregateInputType = {
     order?: true
+    mapTop?: true
+    mapLeft?: true
   }
 
   export type FestivalMinAggregateInputType = {
@@ -4384,6 +4484,8 @@ export namespace Prisma {
     image?: true
     season?: true
     order?: true
+    mapTop?: true
+    mapLeft?: true
     createdAt?: true
   }
 
@@ -4395,6 +4497,8 @@ export namespace Prisma {
     image?: true
     season?: true
     order?: true
+    mapTop?: true
+    mapLeft?: true
     createdAt?: true
   }
 
@@ -4406,6 +4510,8 @@ export namespace Prisma {
     image?: true
     season?: true
     order?: true
+    mapTop?: true
+    mapLeft?: true
     createdAt?: true
     _all?: true
   }
@@ -4504,6 +4610,8 @@ export namespace Prisma {
     image: string
     season: string
     order: number
+    mapTop: number | null
+    mapLeft: number | null
     createdAt: Date
     _count: FestivalCountAggregateOutputType | null
     _avg: FestivalAvgAggregateOutputType | null
@@ -4534,6 +4642,8 @@ export namespace Prisma {
     image?: boolean
     season?: boolean
     order?: boolean
+    mapTop?: boolean
+    mapLeft?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["festival"]>
 
@@ -4545,6 +4655,8 @@ export namespace Prisma {
     image?: boolean
     season?: boolean
     order?: boolean
+    mapTop?: boolean
+    mapLeft?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["festival"]>
 
@@ -4556,6 +4668,8 @@ export namespace Prisma {
     image?: boolean
     season?: boolean
     order?: boolean
+    mapTop?: boolean
+    mapLeft?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["festival"]>
 
@@ -4567,10 +4681,12 @@ export namespace Prisma {
     image?: boolean
     season?: boolean
     order?: boolean
+    mapTop?: boolean
+    mapLeft?: boolean
     createdAt?: boolean
   }
 
-  export type FestivalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "content" | "image" | "season" | "order" | "createdAt", ExtArgs["result"]["festival"]>
+  export type FestivalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "content" | "image" | "season" | "order" | "mapTop" | "mapLeft" | "createdAt", ExtArgs["result"]["festival"]>
 
   export type $FestivalPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Festival"
@@ -4583,6 +4699,8 @@ export namespace Prisma {
       image: string
       season: string
       order: number
+      mapTop: number | null
+      mapLeft: number | null
       createdAt: Date
     }, ExtArgs["result"]["festival"]>
     composites: {}
@@ -5014,6 +5132,8 @@ export namespace Prisma {
     readonly image: FieldRef<"Festival", 'String'>
     readonly season: FieldRef<"Festival", 'String'>
     readonly order: FieldRef<"Festival", 'Int'>
+    readonly mapTop: FieldRef<"Festival", 'Float'>
+    readonly mapLeft: FieldRef<"Festival", 'Float'>
     readonly createdAt: FieldRef<"Festival", 'DateTime'>
   }
     
@@ -5395,10 +5515,14 @@ export namespace Prisma {
 
   export type FoodAvgAggregateOutputType = {
     order: number | null
+    mapTop: number | null
+    mapLeft: number | null
   }
 
   export type FoodSumAggregateOutputType = {
     order: number | null
+    mapTop: number | null
+    mapLeft: number | null
   }
 
   export type FoodMinAggregateOutputType = {
@@ -5407,6 +5531,8 @@ export namespace Prisma {
     description: string | null
     image: string | null
     order: number | null
+    mapTop: number | null
+    mapLeft: number | null
     createdAt: Date | null
   }
 
@@ -5416,6 +5542,8 @@ export namespace Prisma {
     description: string | null
     image: string | null
     order: number | null
+    mapTop: number | null
+    mapLeft: number | null
     createdAt: Date | null
   }
 
@@ -5425,6 +5553,8 @@ export namespace Prisma {
     description: number
     image: number
     order: number
+    mapTop: number
+    mapLeft: number
     createdAt: number
     _all: number
   }
@@ -5432,10 +5562,14 @@ export namespace Prisma {
 
   export type FoodAvgAggregateInputType = {
     order?: true
+    mapTop?: true
+    mapLeft?: true
   }
 
   export type FoodSumAggregateInputType = {
     order?: true
+    mapTop?: true
+    mapLeft?: true
   }
 
   export type FoodMinAggregateInputType = {
@@ -5444,6 +5578,8 @@ export namespace Prisma {
     description?: true
     image?: true
     order?: true
+    mapTop?: true
+    mapLeft?: true
     createdAt?: true
   }
 
@@ -5453,6 +5589,8 @@ export namespace Prisma {
     description?: true
     image?: true
     order?: true
+    mapTop?: true
+    mapLeft?: true
     createdAt?: true
   }
 
@@ -5462,6 +5600,8 @@ export namespace Prisma {
     description?: true
     image?: true
     order?: true
+    mapTop?: true
+    mapLeft?: true
     createdAt?: true
     _all?: true
   }
@@ -5558,6 +5698,8 @@ export namespace Prisma {
     description: string
     image: string
     order: number
+    mapTop: number | null
+    mapLeft: number | null
     createdAt: Date
     _count: FoodCountAggregateOutputType | null
     _avg: FoodAvgAggregateOutputType | null
@@ -5586,6 +5728,8 @@ export namespace Prisma {
     description?: boolean
     image?: boolean
     order?: boolean
+    mapTop?: boolean
+    mapLeft?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["food"]>
 
@@ -5595,6 +5739,8 @@ export namespace Prisma {
     description?: boolean
     image?: boolean
     order?: boolean
+    mapTop?: boolean
+    mapLeft?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["food"]>
 
@@ -5604,6 +5750,8 @@ export namespace Prisma {
     description?: boolean
     image?: boolean
     order?: boolean
+    mapTop?: boolean
+    mapLeft?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["food"]>
 
@@ -5613,10 +5761,12 @@ export namespace Prisma {
     description?: boolean
     image?: boolean
     order?: boolean
+    mapTop?: boolean
+    mapLeft?: boolean
     createdAt?: boolean
   }
 
-  export type FoodOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "image" | "order" | "createdAt", ExtArgs["result"]["food"]>
+  export type FoodOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "image" | "order" | "mapTop" | "mapLeft" | "createdAt", ExtArgs["result"]["food"]>
 
   export type $FoodPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Food"
@@ -5627,6 +5777,8 @@ export namespace Prisma {
       description: string
       image: string
       order: number
+      mapTop: number | null
+      mapLeft: number | null
       createdAt: Date
     }, ExtArgs["result"]["food"]>
     composites: {}
@@ -6056,6 +6208,8 @@ export namespace Prisma {
     readonly description: FieldRef<"Food", 'String'>
     readonly image: FieldRef<"Food", 'String'>
     readonly order: FieldRef<"Food", 'Int'>
+    readonly mapTop: FieldRef<"Food", 'Float'>
+    readonly mapLeft: FieldRef<"Food", 'Float'>
     readonly createdAt: FieldRef<"Food", 'DateTime'>
   }
     
@@ -7466,10 +7620,14 @@ export namespace Prisma {
 
   export type TourAvgAggregateOutputType = {
     order: number | null
+    mapTop: number | null
+    mapLeft: number | null
   }
 
   export type TourSumAggregateOutputType = {
     order: number | null
+    mapTop: number | null
+    mapLeft: number | null
   }
 
   export type TourMinAggregateOutputType = {
@@ -7480,6 +7638,8 @@ export namespace Prisma {
     duration: string | null
     image: string | null
     order: number | null
+    mapTop: number | null
+    mapLeft: number | null
     createdAt: Date | null
   }
 
@@ -7491,6 +7651,8 @@ export namespace Prisma {
     duration: string | null
     image: string | null
     order: number | null
+    mapTop: number | null
+    mapLeft: number | null
     createdAt: Date | null
   }
 
@@ -7502,6 +7664,8 @@ export namespace Prisma {
     duration: number
     image: number
     order: number
+    mapTop: number
+    mapLeft: number
     createdAt: number
     _all: number
   }
@@ -7509,10 +7673,14 @@ export namespace Prisma {
 
   export type TourAvgAggregateInputType = {
     order?: true
+    mapTop?: true
+    mapLeft?: true
   }
 
   export type TourSumAggregateInputType = {
     order?: true
+    mapTop?: true
+    mapLeft?: true
   }
 
   export type TourMinAggregateInputType = {
@@ -7523,6 +7691,8 @@ export namespace Prisma {
     duration?: true
     image?: true
     order?: true
+    mapTop?: true
+    mapLeft?: true
     createdAt?: true
   }
 
@@ -7534,6 +7704,8 @@ export namespace Prisma {
     duration?: true
     image?: true
     order?: true
+    mapTop?: true
+    mapLeft?: true
     createdAt?: true
   }
 
@@ -7545,6 +7717,8 @@ export namespace Prisma {
     duration?: true
     image?: true
     order?: true
+    mapTop?: true
+    mapLeft?: true
     createdAt?: true
     _all?: true
   }
@@ -7643,6 +7817,8 @@ export namespace Prisma {
     duration: string
     image: string
     order: number
+    mapTop: number | null
+    mapLeft: number | null
     createdAt: Date
     _count: TourCountAggregateOutputType | null
     _avg: TourAvgAggregateOutputType | null
@@ -7673,6 +7849,8 @@ export namespace Prisma {
     duration?: boolean
     image?: boolean
     order?: boolean
+    mapTop?: boolean
+    mapLeft?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["tour"]>
 
@@ -7684,6 +7862,8 @@ export namespace Prisma {
     duration?: boolean
     image?: boolean
     order?: boolean
+    mapTop?: boolean
+    mapLeft?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["tour"]>
 
@@ -7695,6 +7875,8 @@ export namespace Prisma {
     duration?: boolean
     image?: boolean
     order?: boolean
+    mapTop?: boolean
+    mapLeft?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["tour"]>
 
@@ -7706,10 +7888,12 @@ export namespace Prisma {
     duration?: boolean
     image?: boolean
     order?: boolean
+    mapTop?: boolean
+    mapLeft?: boolean
     createdAt?: boolean
   }
 
-  export type TourOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "price" | "duration" | "image" | "order" | "createdAt", ExtArgs["result"]["tour"]>
+  export type TourOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "price" | "duration" | "image" | "order" | "mapTop" | "mapLeft" | "createdAt", ExtArgs["result"]["tour"]>
 
   export type $TourPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Tour"
@@ -7722,6 +7906,8 @@ export namespace Prisma {
       duration: string
       image: string
       order: number
+      mapTop: number | null
+      mapLeft: number | null
       createdAt: Date
     }, ExtArgs["result"]["tour"]>
     composites: {}
@@ -8153,6 +8339,8 @@ export namespace Prisma {
     readonly duration: FieldRef<"Tour", 'String'>
     readonly image: FieldRef<"Tour", 'String'>
     readonly order: FieldRef<"Tour", 'Int'>
+    readonly mapTop: FieldRef<"Tour", 'Float'>
+    readonly mapLeft: FieldRef<"Tour", 'Float'>
     readonly createdAt: FieldRef<"Tour", 'DateTime'>
   }
     
@@ -8534,10 +8722,14 @@ export namespace Prisma {
 
   export type ProductAvgAggregateOutputType = {
     order: number | null
+    mapTop: number | null
+    mapLeft: number | null
   }
 
   export type ProductSumAggregateOutputType = {
     order: number | null
+    mapTop: number | null
+    mapLeft: number | null
   }
 
   export type ProductMinAggregateOutputType = {
@@ -8547,6 +8739,8 @@ export namespace Prisma {
     price: string | null
     image: string | null
     order: number | null
+    mapTop: number | null
+    mapLeft: number | null
     createdAt: Date | null
   }
 
@@ -8557,6 +8751,8 @@ export namespace Prisma {
     price: string | null
     image: string | null
     order: number | null
+    mapTop: number | null
+    mapLeft: number | null
     createdAt: Date | null
   }
 
@@ -8567,6 +8763,8 @@ export namespace Prisma {
     price: number
     image: number
     order: number
+    mapTop: number
+    mapLeft: number
     createdAt: number
     _all: number
   }
@@ -8574,10 +8772,14 @@ export namespace Prisma {
 
   export type ProductAvgAggregateInputType = {
     order?: true
+    mapTop?: true
+    mapLeft?: true
   }
 
   export type ProductSumAggregateInputType = {
     order?: true
+    mapTop?: true
+    mapLeft?: true
   }
 
   export type ProductMinAggregateInputType = {
@@ -8587,6 +8789,8 @@ export namespace Prisma {
     price?: true
     image?: true
     order?: true
+    mapTop?: true
+    mapLeft?: true
     createdAt?: true
   }
 
@@ -8597,6 +8801,8 @@ export namespace Prisma {
     price?: true
     image?: true
     order?: true
+    mapTop?: true
+    mapLeft?: true
     createdAt?: true
   }
 
@@ -8607,6 +8813,8 @@ export namespace Prisma {
     price?: true
     image?: true
     order?: true
+    mapTop?: true
+    mapLeft?: true
     createdAt?: true
     _all?: true
   }
@@ -8704,6 +8912,8 @@ export namespace Prisma {
     price: string
     image: string
     order: number
+    mapTop: number | null
+    mapLeft: number | null
     createdAt: Date
     _count: ProductCountAggregateOutputType | null
     _avg: ProductAvgAggregateOutputType | null
@@ -8733,6 +8943,8 @@ export namespace Prisma {
     price?: boolean
     image?: boolean
     order?: boolean
+    mapTop?: boolean
+    mapLeft?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["product"]>
 
@@ -8743,6 +8955,8 @@ export namespace Prisma {
     price?: boolean
     image?: boolean
     order?: boolean
+    mapTop?: boolean
+    mapLeft?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["product"]>
 
@@ -8753,6 +8967,8 @@ export namespace Prisma {
     price?: boolean
     image?: boolean
     order?: boolean
+    mapTop?: boolean
+    mapLeft?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["product"]>
 
@@ -8763,10 +8979,12 @@ export namespace Prisma {
     price?: boolean
     image?: boolean
     order?: boolean
+    mapTop?: boolean
+    mapLeft?: boolean
     createdAt?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "price" | "image" | "order" | "createdAt", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "price" | "image" | "order" | "mapTop" | "mapLeft" | "createdAt", ExtArgs["result"]["product"]>
 
   export type $ProductPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Product"
@@ -8778,6 +8996,8 @@ export namespace Prisma {
       price: string
       image: string
       order: number
+      mapTop: number | null
+      mapLeft: number | null
       createdAt: Date
     }, ExtArgs["result"]["product"]>
     composites: {}
@@ -9208,6 +9428,8 @@ export namespace Prisma {
     readonly price: FieldRef<"Product", 'String'>
     readonly image: FieldRef<"Product", 'String'>
     readonly order: FieldRef<"Product", 'Int'>
+    readonly mapTop: FieldRef<"Product", 'Float'>
+    readonly mapLeft: FieldRef<"Product", 'Float'>
     readonly createdAt: FieldRef<"Product", 'DateTime'>
   }
     
@@ -17494,6 +17716,7 @@ export namespace Prisma {
     heroSubtitle: 'heroSubtitle',
     heroImage: 'heroImage',
     logoImage: 'logoImage',
+    locationMapImage: 'locationMapImage',
     aboutHeading: 'aboutHeading',
     aboutBody: 'aboutBody',
     contactHeading: 'contactHeading',
@@ -17515,6 +17738,11 @@ export namespace Prisma {
     image: 'image',
     tag: 'tag',
     order: 'order',
+    mapTop: 'mapTop',
+    mapLeft: 'mapLeft',
+    floatingImage1: 'floatingImage1',
+    floatingImage2: 'floatingImage2',
+    floatingImage3: 'floatingImage3',
     createdAt: 'createdAt'
   };
 
@@ -17529,6 +17757,8 @@ export namespace Prisma {
     image: 'image',
     season: 'season',
     order: 'order',
+    mapTop: 'mapTop',
+    mapLeft: 'mapLeft',
     createdAt: 'createdAt'
   };
 
@@ -17541,6 +17771,8 @@ export namespace Prisma {
     description: 'description',
     image: 'image',
     order: 'order',
+    mapTop: 'mapTop',
+    mapLeft: 'mapLeft',
     createdAt: 'createdAt'
   };
 
@@ -17566,6 +17798,8 @@ export namespace Prisma {
     duration: 'duration',
     image: 'image',
     order: 'order',
+    mapTop: 'mapTop',
+    mapLeft: 'mapLeft',
     createdAt: 'createdAt'
   };
 
@@ -17579,6 +17813,8 @@ export namespace Prisma {
     price: 'price',
     image: 'image',
     order: 'order',
+    mapTop: 'mapTop',
+    mapLeft: 'mapLeft',
     createdAt: 'createdAt'
   };
 
@@ -17779,6 +18015,7 @@ export namespace Prisma {
     heroSubtitle?: StringFilter<"SiteContent"> | string
     heroImage?: StringFilter<"SiteContent"> | string
     logoImage?: StringFilter<"SiteContent"> | string
+    locationMapImage?: StringFilter<"SiteContent"> | string
     aboutHeading?: StringFilter<"SiteContent"> | string
     aboutBody?: StringFilter<"SiteContent"> | string
     contactHeading?: StringFilter<"SiteContent"> | string
@@ -17796,6 +18033,7 @@ export namespace Prisma {
     heroSubtitle?: SortOrder
     heroImage?: SortOrder
     logoImage?: SortOrder
+    locationMapImage?: SortOrder
     aboutHeading?: SortOrder
     aboutBody?: SortOrder
     contactHeading?: SortOrder
@@ -17816,6 +18054,7 @@ export namespace Prisma {
     heroSubtitle?: StringFilter<"SiteContent"> | string
     heroImage?: StringFilter<"SiteContent"> | string
     logoImage?: StringFilter<"SiteContent"> | string
+    locationMapImage?: StringFilter<"SiteContent"> | string
     aboutHeading?: StringFilter<"SiteContent"> | string
     aboutBody?: StringFilter<"SiteContent"> | string
     contactHeading?: StringFilter<"SiteContent"> | string
@@ -17833,6 +18072,7 @@ export namespace Prisma {
     heroSubtitle?: SortOrder
     heroImage?: SortOrder
     logoImage?: SortOrder
+    locationMapImage?: SortOrder
     aboutHeading?: SortOrder
     aboutBody?: SortOrder
     contactHeading?: SortOrder
@@ -17856,6 +18096,7 @@ export namespace Prisma {
     heroSubtitle?: StringWithAggregatesFilter<"SiteContent"> | string
     heroImage?: StringWithAggregatesFilter<"SiteContent"> | string
     logoImage?: StringWithAggregatesFilter<"SiteContent"> | string
+    locationMapImage?: StringWithAggregatesFilter<"SiteContent"> | string
     aboutHeading?: StringWithAggregatesFilter<"SiteContent"> | string
     aboutBody?: StringWithAggregatesFilter<"SiteContent"> | string
     contactHeading?: StringWithAggregatesFilter<"SiteContent"> | string
@@ -17877,6 +18118,11 @@ export namespace Prisma {
     image?: StringFilter<"Location"> | string
     tag?: StringFilter<"Location"> | string
     order?: IntFilter<"Location"> | number
+    mapTop?: FloatNullableFilter<"Location"> | number | null
+    mapLeft?: FloatNullableFilter<"Location"> | number | null
+    floatingImage1?: StringNullableFilter<"Location"> | string | null
+    floatingImage2?: StringNullableFilter<"Location"> | string | null
+    floatingImage3?: StringNullableFilter<"Location"> | string | null
     createdAt?: DateTimeFilter<"Location"> | Date | string
   }
 
@@ -17888,6 +18134,11 @@ export namespace Prisma {
     image?: SortOrder
     tag?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrderInput | SortOrder
+    mapLeft?: SortOrderInput | SortOrder
+    floatingImage1?: SortOrderInput | SortOrder
+    floatingImage2?: SortOrderInput | SortOrder
+    floatingImage3?: SortOrderInput | SortOrder
     createdAt?: SortOrder
   }
 
@@ -17902,6 +18153,11 @@ export namespace Prisma {
     image?: StringFilter<"Location"> | string
     tag?: StringFilter<"Location"> | string
     order?: IntFilter<"Location"> | number
+    mapTop?: FloatNullableFilter<"Location"> | number | null
+    mapLeft?: FloatNullableFilter<"Location"> | number | null
+    floatingImage1?: StringNullableFilter<"Location"> | string | null
+    floatingImage2?: StringNullableFilter<"Location"> | string | null
+    floatingImage3?: StringNullableFilter<"Location"> | string | null
     createdAt?: DateTimeFilter<"Location"> | Date | string
   }, "id">
 
@@ -17913,6 +18169,11 @@ export namespace Prisma {
     image?: SortOrder
     tag?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrderInput | SortOrder
+    mapLeft?: SortOrderInput | SortOrder
+    floatingImage1?: SortOrderInput | SortOrder
+    floatingImage2?: SortOrderInput | SortOrder
+    floatingImage3?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: LocationCountOrderByAggregateInput
     _avg?: LocationAvgOrderByAggregateInput
@@ -17932,6 +18193,11 @@ export namespace Prisma {
     image?: StringWithAggregatesFilter<"Location"> | string
     tag?: StringWithAggregatesFilter<"Location"> | string
     order?: IntWithAggregatesFilter<"Location"> | number
+    mapTop?: FloatNullableWithAggregatesFilter<"Location"> | number | null
+    mapLeft?: FloatNullableWithAggregatesFilter<"Location"> | number | null
+    floatingImage1?: StringNullableWithAggregatesFilter<"Location"> | string | null
+    floatingImage2?: StringNullableWithAggregatesFilter<"Location"> | string | null
+    floatingImage3?: StringNullableWithAggregatesFilter<"Location"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Location"> | Date | string
   }
 
@@ -17946,6 +18212,8 @@ export namespace Prisma {
     image?: StringFilter<"Festival"> | string
     season?: StringFilter<"Festival"> | string
     order?: IntFilter<"Festival"> | number
+    mapTop?: FloatNullableFilter<"Festival"> | number | null
+    mapLeft?: FloatNullableFilter<"Festival"> | number | null
     createdAt?: DateTimeFilter<"Festival"> | Date | string
   }
 
@@ -17957,6 +18225,8 @@ export namespace Prisma {
     image?: SortOrder
     season?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrderInput | SortOrder
+    mapLeft?: SortOrderInput | SortOrder
     createdAt?: SortOrder
   }
 
@@ -17971,6 +18241,8 @@ export namespace Prisma {
     image?: StringFilter<"Festival"> | string
     season?: StringFilter<"Festival"> | string
     order?: IntFilter<"Festival"> | number
+    mapTop?: FloatNullableFilter<"Festival"> | number | null
+    mapLeft?: FloatNullableFilter<"Festival"> | number | null
     createdAt?: DateTimeFilter<"Festival"> | Date | string
   }, "id">
 
@@ -17982,6 +18254,8 @@ export namespace Prisma {
     image?: SortOrder
     season?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrderInput | SortOrder
+    mapLeft?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: FestivalCountOrderByAggregateInput
     _avg?: FestivalAvgOrderByAggregateInput
@@ -18001,6 +18275,8 @@ export namespace Prisma {
     image?: StringWithAggregatesFilter<"Festival"> | string
     season?: StringWithAggregatesFilter<"Festival"> | string
     order?: IntWithAggregatesFilter<"Festival"> | number
+    mapTop?: FloatNullableWithAggregatesFilter<"Festival"> | number | null
+    mapLeft?: FloatNullableWithAggregatesFilter<"Festival"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"Festival"> | Date | string
   }
 
@@ -18013,6 +18289,8 @@ export namespace Prisma {
     description?: StringFilter<"Food"> | string
     image?: StringFilter<"Food"> | string
     order?: IntFilter<"Food"> | number
+    mapTop?: FloatNullableFilter<"Food"> | number | null
+    mapLeft?: FloatNullableFilter<"Food"> | number | null
     createdAt?: DateTimeFilter<"Food"> | Date | string
   }
 
@@ -18022,6 +18300,8 @@ export namespace Prisma {
     description?: SortOrder
     image?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrderInput | SortOrder
+    mapLeft?: SortOrderInput | SortOrder
     createdAt?: SortOrder
   }
 
@@ -18034,6 +18314,8 @@ export namespace Prisma {
     description?: StringFilter<"Food"> | string
     image?: StringFilter<"Food"> | string
     order?: IntFilter<"Food"> | number
+    mapTop?: FloatNullableFilter<"Food"> | number | null
+    mapLeft?: FloatNullableFilter<"Food"> | number | null
     createdAt?: DateTimeFilter<"Food"> | Date | string
   }, "id">
 
@@ -18043,6 +18325,8 @@ export namespace Prisma {
     description?: SortOrder
     image?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrderInput | SortOrder
+    mapLeft?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: FoodCountOrderByAggregateInput
     _avg?: FoodAvgOrderByAggregateInput
@@ -18060,6 +18344,8 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"Food"> | string
     image?: StringWithAggregatesFilter<"Food"> | string
     order?: IntWithAggregatesFilter<"Food"> | number
+    mapTop?: FloatNullableWithAggregatesFilter<"Food"> | number | null
+    mapLeft?: FloatNullableWithAggregatesFilter<"Food"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"Food"> | Date | string
   }
 
@@ -18128,6 +18414,8 @@ export namespace Prisma {
     duration?: StringFilter<"Tour"> | string
     image?: StringFilter<"Tour"> | string
     order?: IntFilter<"Tour"> | number
+    mapTop?: FloatNullableFilter<"Tour"> | number | null
+    mapLeft?: FloatNullableFilter<"Tour"> | number | null
     createdAt?: DateTimeFilter<"Tour"> | Date | string
   }
 
@@ -18139,6 +18427,8 @@ export namespace Prisma {
     duration?: SortOrder
     image?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrderInput | SortOrder
+    mapLeft?: SortOrderInput | SortOrder
     createdAt?: SortOrder
   }
 
@@ -18153,6 +18443,8 @@ export namespace Prisma {
     duration?: StringFilter<"Tour"> | string
     image?: StringFilter<"Tour"> | string
     order?: IntFilter<"Tour"> | number
+    mapTop?: FloatNullableFilter<"Tour"> | number | null
+    mapLeft?: FloatNullableFilter<"Tour"> | number | null
     createdAt?: DateTimeFilter<"Tour"> | Date | string
   }, "id">
 
@@ -18164,6 +18456,8 @@ export namespace Prisma {
     duration?: SortOrder
     image?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrderInput | SortOrder
+    mapLeft?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: TourCountOrderByAggregateInput
     _avg?: TourAvgOrderByAggregateInput
@@ -18183,6 +18477,8 @@ export namespace Prisma {
     duration?: StringWithAggregatesFilter<"Tour"> | string
     image?: StringWithAggregatesFilter<"Tour"> | string
     order?: IntWithAggregatesFilter<"Tour"> | number
+    mapTop?: FloatNullableWithAggregatesFilter<"Tour"> | number | null
+    mapLeft?: FloatNullableWithAggregatesFilter<"Tour"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"Tour"> | Date | string
   }
 
@@ -18196,6 +18492,8 @@ export namespace Prisma {
     price?: StringFilter<"Product"> | string
     image?: StringFilter<"Product"> | string
     order?: IntFilter<"Product"> | number
+    mapTop?: FloatNullableFilter<"Product"> | number | null
+    mapLeft?: FloatNullableFilter<"Product"> | number | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
   }
 
@@ -18206,6 +18504,8 @@ export namespace Prisma {
     price?: SortOrder
     image?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrderInput | SortOrder
+    mapLeft?: SortOrderInput | SortOrder
     createdAt?: SortOrder
   }
 
@@ -18219,6 +18519,8 @@ export namespace Prisma {
     price?: StringFilter<"Product"> | string
     image?: StringFilter<"Product"> | string
     order?: IntFilter<"Product"> | number
+    mapTop?: FloatNullableFilter<"Product"> | number | null
+    mapLeft?: FloatNullableFilter<"Product"> | number | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
   }, "id">
 
@@ -18229,6 +18531,8 @@ export namespace Prisma {
     price?: SortOrder
     image?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrderInput | SortOrder
+    mapLeft?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: ProductCountOrderByAggregateInput
     _avg?: ProductAvgOrderByAggregateInput
@@ -18247,6 +18551,8 @@ export namespace Prisma {
     price?: StringWithAggregatesFilter<"Product"> | string
     image?: StringWithAggregatesFilter<"Product"> | string
     order?: IntWithAggregatesFilter<"Product"> | number
+    mapTop?: FloatNullableWithAggregatesFilter<"Product"> | number | null
+    mapLeft?: FloatNullableWithAggregatesFilter<"Product"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
   }
 
@@ -18756,6 +19062,7 @@ export namespace Prisma {
     heroSubtitle?: string
     heroImage?: string
     logoImage?: string
+    locationMapImage?: string
     aboutHeading?: string
     aboutBody?: string
     contactHeading?: string
@@ -18773,6 +19080,7 @@ export namespace Prisma {
     heroSubtitle?: string
     heroImage?: string
     logoImage?: string
+    locationMapImage?: string
     aboutHeading?: string
     aboutBody?: string
     contactHeading?: string
@@ -18790,6 +19098,7 @@ export namespace Prisma {
     heroSubtitle?: StringFieldUpdateOperationsInput | string
     heroImage?: StringFieldUpdateOperationsInput | string
     logoImage?: StringFieldUpdateOperationsInput | string
+    locationMapImage?: StringFieldUpdateOperationsInput | string
     aboutHeading?: StringFieldUpdateOperationsInput | string
     aboutBody?: StringFieldUpdateOperationsInput | string
     contactHeading?: StringFieldUpdateOperationsInput | string
@@ -18807,6 +19116,7 @@ export namespace Prisma {
     heroSubtitle?: StringFieldUpdateOperationsInput | string
     heroImage?: StringFieldUpdateOperationsInput | string
     logoImage?: StringFieldUpdateOperationsInput | string
+    locationMapImage?: StringFieldUpdateOperationsInput | string
     aboutHeading?: StringFieldUpdateOperationsInput | string
     aboutBody?: StringFieldUpdateOperationsInput | string
     contactHeading?: StringFieldUpdateOperationsInput | string
@@ -18824,6 +19134,7 @@ export namespace Prisma {
     heroSubtitle?: string
     heroImage?: string
     logoImage?: string
+    locationMapImage?: string
     aboutHeading?: string
     aboutBody?: string
     contactHeading?: string
@@ -18841,6 +19152,7 @@ export namespace Prisma {
     heroSubtitle?: StringFieldUpdateOperationsInput | string
     heroImage?: StringFieldUpdateOperationsInput | string
     logoImage?: StringFieldUpdateOperationsInput | string
+    locationMapImage?: StringFieldUpdateOperationsInput | string
     aboutHeading?: StringFieldUpdateOperationsInput | string
     aboutBody?: StringFieldUpdateOperationsInput | string
     contactHeading?: StringFieldUpdateOperationsInput | string
@@ -18858,6 +19170,7 @@ export namespace Prisma {
     heroSubtitle?: StringFieldUpdateOperationsInput | string
     heroImage?: StringFieldUpdateOperationsInput | string
     logoImage?: StringFieldUpdateOperationsInput | string
+    locationMapImage?: StringFieldUpdateOperationsInput | string
     aboutHeading?: StringFieldUpdateOperationsInput | string
     aboutBody?: StringFieldUpdateOperationsInput | string
     contactHeading?: StringFieldUpdateOperationsInput | string
@@ -18876,6 +19189,11 @@ export namespace Prisma {
     image: string
     tag?: string
     order?: number
+    mapTop?: number | null
+    mapLeft?: number | null
+    floatingImage1?: string | null
+    floatingImage2?: string | null
+    floatingImage3?: string | null
     createdAt?: Date | string
   }
 
@@ -18887,6 +19205,11 @@ export namespace Prisma {
     image: string
     tag?: string
     order?: number
+    mapTop?: number | null
+    mapLeft?: number | null
+    floatingImage1?: string | null
+    floatingImage2?: string | null
+    floatingImage3?: string | null
     createdAt?: Date | string
   }
 
@@ -18898,6 +19221,11 @@ export namespace Prisma {
     image?: StringFieldUpdateOperationsInput | string
     tag?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    mapTop?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLeft?: NullableFloatFieldUpdateOperationsInput | number | null
+    floatingImage1?: NullableStringFieldUpdateOperationsInput | string | null
+    floatingImage2?: NullableStringFieldUpdateOperationsInput | string | null
+    floatingImage3?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -18909,6 +19237,11 @@ export namespace Prisma {
     image?: StringFieldUpdateOperationsInput | string
     tag?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    mapTop?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLeft?: NullableFloatFieldUpdateOperationsInput | number | null
+    floatingImage1?: NullableStringFieldUpdateOperationsInput | string | null
+    floatingImage2?: NullableStringFieldUpdateOperationsInput | string | null
+    floatingImage3?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -18920,6 +19253,11 @@ export namespace Prisma {
     image: string
     tag?: string
     order?: number
+    mapTop?: number | null
+    mapLeft?: number | null
+    floatingImage1?: string | null
+    floatingImage2?: string | null
+    floatingImage3?: string | null
     createdAt?: Date | string
   }
 
@@ -18931,6 +19269,11 @@ export namespace Prisma {
     image?: StringFieldUpdateOperationsInput | string
     tag?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    mapTop?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLeft?: NullableFloatFieldUpdateOperationsInput | number | null
+    floatingImage1?: NullableStringFieldUpdateOperationsInput | string | null
+    floatingImage2?: NullableStringFieldUpdateOperationsInput | string | null
+    floatingImage3?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -18942,6 +19285,11 @@ export namespace Prisma {
     image?: StringFieldUpdateOperationsInput | string
     tag?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    mapTop?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLeft?: NullableFloatFieldUpdateOperationsInput | number | null
+    floatingImage1?: NullableStringFieldUpdateOperationsInput | string | null
+    floatingImage2?: NullableStringFieldUpdateOperationsInput | string | null
+    floatingImage3?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -18953,6 +19301,8 @@ export namespace Prisma {
     image: string
     season?: string
     order?: number
+    mapTop?: number | null
+    mapLeft?: number | null
     createdAt?: Date | string
   }
 
@@ -18964,6 +19314,8 @@ export namespace Prisma {
     image: string
     season?: string
     order?: number
+    mapTop?: number | null
+    mapLeft?: number | null
     createdAt?: Date | string
   }
 
@@ -18975,6 +19327,8 @@ export namespace Prisma {
     image?: StringFieldUpdateOperationsInput | string
     season?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    mapTop?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLeft?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -18986,6 +19340,8 @@ export namespace Prisma {
     image?: StringFieldUpdateOperationsInput | string
     season?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    mapTop?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLeft?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -18997,6 +19353,8 @@ export namespace Prisma {
     image: string
     season?: string
     order?: number
+    mapTop?: number | null
+    mapLeft?: number | null
     createdAt?: Date | string
   }
 
@@ -19008,6 +19366,8 @@ export namespace Prisma {
     image?: StringFieldUpdateOperationsInput | string
     season?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    mapTop?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLeft?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -19019,6 +19379,8 @@ export namespace Prisma {
     image?: StringFieldUpdateOperationsInput | string
     season?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    mapTop?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLeft?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -19028,6 +19390,8 @@ export namespace Prisma {
     description: string
     image: string
     order?: number
+    mapTop?: number | null
+    mapLeft?: number | null
     createdAt?: Date | string
   }
 
@@ -19037,6 +19401,8 @@ export namespace Prisma {
     description: string
     image: string
     order?: number
+    mapTop?: number | null
+    mapLeft?: number | null
     createdAt?: Date | string
   }
 
@@ -19046,6 +19412,8 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    mapTop?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLeft?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -19055,6 +19423,8 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    mapTop?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLeft?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -19064,6 +19434,8 @@ export namespace Prisma {
     description: string
     image: string
     order?: number
+    mapTop?: number | null
+    mapLeft?: number | null
     createdAt?: Date | string
   }
 
@@ -19073,6 +19445,8 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    mapTop?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLeft?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -19082,6 +19456,8 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    mapTop?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLeft?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -19149,6 +19525,8 @@ export namespace Prisma {
     duration?: string
     image: string
     order?: number
+    mapTop?: number | null
+    mapLeft?: number | null
     createdAt?: Date | string
   }
 
@@ -19160,6 +19538,8 @@ export namespace Prisma {
     duration?: string
     image: string
     order?: number
+    mapTop?: number | null
+    mapLeft?: number | null
     createdAt?: Date | string
   }
 
@@ -19171,6 +19551,8 @@ export namespace Prisma {
     duration?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    mapTop?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLeft?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -19182,6 +19564,8 @@ export namespace Prisma {
     duration?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    mapTop?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLeft?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -19193,6 +19577,8 @@ export namespace Prisma {
     duration?: string
     image: string
     order?: number
+    mapTop?: number | null
+    mapLeft?: number | null
     createdAt?: Date | string
   }
 
@@ -19204,6 +19590,8 @@ export namespace Prisma {
     duration?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    mapTop?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLeft?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -19215,6 +19603,8 @@ export namespace Prisma {
     duration?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    mapTop?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLeft?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -19225,6 +19615,8 @@ export namespace Prisma {
     price?: string
     image: string
     order?: number
+    mapTop?: number | null
+    mapLeft?: number | null
     createdAt?: Date | string
   }
 
@@ -19235,6 +19627,8 @@ export namespace Prisma {
     price?: string
     image: string
     order?: number
+    mapTop?: number | null
+    mapLeft?: number | null
     createdAt?: Date | string
   }
 
@@ -19245,6 +19639,8 @@ export namespace Prisma {
     price?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    mapTop?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLeft?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -19255,6 +19651,8 @@ export namespace Prisma {
     price?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    mapTop?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLeft?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -19265,6 +19663,8 @@ export namespace Prisma {
     price?: string
     image: string
     order?: number
+    mapTop?: number | null
+    mapLeft?: number | null
     createdAt?: Date | string
   }
 
@@ -19275,6 +19675,8 @@ export namespace Prisma {
     price?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    mapTop?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLeft?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -19285,6 +19687,8 @@ export namespace Prisma {
     price?: StringFieldUpdateOperationsInput | string
     image?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    mapTop?: NullableFloatFieldUpdateOperationsInput | number | null
+    mapLeft?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -19861,6 +20265,7 @@ export namespace Prisma {
     heroSubtitle?: SortOrder
     heroImage?: SortOrder
     logoImage?: SortOrder
+    locationMapImage?: SortOrder
     aboutHeading?: SortOrder
     aboutBody?: SortOrder
     contactHeading?: SortOrder
@@ -19878,6 +20283,7 @@ export namespace Prisma {
     heroSubtitle?: SortOrder
     heroImage?: SortOrder
     logoImage?: SortOrder
+    locationMapImage?: SortOrder
     aboutHeading?: SortOrder
     aboutBody?: SortOrder
     contactHeading?: SortOrder
@@ -19895,6 +20301,7 @@ export namespace Prisma {
     heroSubtitle?: SortOrder
     heroImage?: SortOrder
     logoImage?: SortOrder
+    locationMapImage?: SortOrder
     aboutHeading?: SortOrder
     aboutBody?: SortOrder
     contactHeading?: SortOrder
@@ -19948,6 +20355,37 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type LocationCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
@@ -19956,11 +20394,18 @@ export namespace Prisma {
     image?: SortOrder
     tag?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
+    floatingImage1?: SortOrder
+    floatingImage2?: SortOrder
+    floatingImage3?: SortOrder
     createdAt?: SortOrder
   }
 
   export type LocationAvgOrderByAggregateInput = {
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
   }
 
   export type LocationMaxOrderByAggregateInput = {
@@ -19971,6 +20416,11 @@ export namespace Prisma {
     image?: SortOrder
     tag?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
+    floatingImage1?: SortOrder
+    floatingImage2?: SortOrder
+    floatingImage3?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -19982,11 +20432,18 @@ export namespace Prisma {
     image?: SortOrder
     tag?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
+    floatingImage1?: SortOrder
+    floatingImage2?: SortOrder
+    floatingImage3?: SortOrder
     createdAt?: SortOrder
   }
 
   export type LocationSumOrderByAggregateInput = {
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -20005,6 +20462,40 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type FestivalCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
@@ -20013,11 +20504,15 @@ export namespace Prisma {
     image?: SortOrder
     season?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
     createdAt?: SortOrder
   }
 
   export type FestivalAvgOrderByAggregateInput = {
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
   }
 
   export type FestivalMaxOrderByAggregateInput = {
@@ -20028,6 +20523,8 @@ export namespace Prisma {
     image?: SortOrder
     season?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -20039,11 +20536,15 @@ export namespace Prisma {
     image?: SortOrder
     season?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
     createdAt?: SortOrder
   }
 
   export type FestivalSumOrderByAggregateInput = {
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
   }
 
   export type FoodCountOrderByAggregateInput = {
@@ -20052,11 +20553,15 @@ export namespace Prisma {
     description?: SortOrder
     image?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
     createdAt?: SortOrder
   }
 
   export type FoodAvgOrderByAggregateInput = {
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
   }
 
   export type FoodMaxOrderByAggregateInput = {
@@ -20065,6 +20570,8 @@ export namespace Prisma {
     description?: SortOrder
     image?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -20074,11 +20581,15 @@ export namespace Prisma {
     description?: SortOrder
     image?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
     createdAt?: SortOrder
   }
 
   export type FoodSumOrderByAggregateInput = {
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
   }
 
   export type GalleryImageCountOrderByAggregateInput = {
@@ -20121,11 +20632,15 @@ export namespace Prisma {
     duration?: SortOrder
     image?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
     createdAt?: SortOrder
   }
 
   export type TourAvgOrderByAggregateInput = {
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
   }
 
   export type TourMaxOrderByAggregateInput = {
@@ -20136,6 +20651,8 @@ export namespace Prisma {
     duration?: SortOrder
     image?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -20147,11 +20664,15 @@ export namespace Prisma {
     duration?: SortOrder
     image?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
     createdAt?: SortOrder
   }
 
   export type TourSumOrderByAggregateInput = {
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
   }
 
   export type ProductCountOrderByAggregateInput = {
@@ -20161,11 +20682,15 @@ export namespace Prisma {
     price?: SortOrder
     image?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
     createdAt?: SortOrder
   }
 
   export type ProductAvgOrderByAggregateInput = {
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
   }
 
   export type ProductMaxOrderByAggregateInput = {
@@ -20175,6 +20700,8 @@ export namespace Prisma {
     price?: SortOrder
     image?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -20185,26 +20712,15 @@ export namespace Prisma {
     price?: SortOrder
     image?: SortOrder
     order?: SortOrder
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
     createdAt?: SortOrder
   }
 
   export type ProductSumOrderByAggregateInput = {
     order?: SortOrder
-  }
-
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+    mapTop?: SortOrder
+    mapLeft?: SortOrder
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -20240,11 +20756,6 @@ export namespace Prisma {
     every?: TourBookingWhereInput
     some?: TourBookingWhereInput
     none?: TourBookingWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type AccountOrderByRelationAggregateInput = {
@@ -20291,24 +20802,6 @@ export namespace Prisma {
     emailVerified?: SortOrder
     image?: SortOrder
     createdAt?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -20634,6 +21127,18 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type AccountCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -20688,10 +21193,6 @@ export namespace Prisma {
     connectOrCreate?: TourBookingCreateOrConnectWithoutUserInput | TourBookingCreateOrConnectWithoutUserInput[]
     createMany?: TourBookingCreateManyUserInputEnvelope
     connect?: TourBookingWhereUniqueInput | TourBookingWhereUniqueInput[]
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -21001,6 +21502,31 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -21028,29 +21554,31 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -21070,15 +21598,15 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -21109,17 +21637,6 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type AccountCreateWithoutUserInput = {

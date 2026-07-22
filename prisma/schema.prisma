@@ -26,6 +26,7 @@ model SiteContent {
   heroSubtitle    String   @default("Nơi phù sa sông Hậu gặp gỡ hồn Khmer, những hàng cây cổ thụ và mùi biển mặn Ba Động.")
   heroImage       String   @default("/images/hero-tra-vinh.png")
   logoImage       String   @default("/logo.png")
+  locationMapImage String  @default("/images/map.jpg")
 
   // Giới thiệu tổng quan
   aboutHeading    String   @default("Vùng đất của cây và nước")
@@ -50,6 +51,11 @@ model Location {
   image       String
   tag         String   @default("Điểm đến")
   order       Int      @default(0)
+  mapTop      Float?
+  mapLeft     Float?
+  floatingImage1 String?
+  floatingImage2 String?
+  floatingImage3 String?
   createdAt   DateTime @default(now())
 }
 
@@ -62,6 +68,8 @@ model Festival {
   image       String
   season      String   @default("")
   order       Int      @default(0)
+  mapTop      Float?
+  mapLeft     Float?
   createdAt   DateTime @default(now())
 }
 
@@ -72,6 +80,8 @@ model Food {
   description String
   image       String
   order       Int      @default(0)
+  mapTop      Float?
+  mapLeft     Float?
   createdAt   DateTime @default(now())
 }
 
@@ -93,6 +103,8 @@ model Tour {
   duration    String   @default("1 Ngày")
   image       String
   order       Int      @default(0)
+  mapTop      Float?
+  mapLeft     Float?
   createdAt   DateTime @default(now())
 }
 
@@ -104,6 +116,8 @@ model Product {
   price       String   @default("Liên hệ")
   image       String
   order       Int      @default(0)
+  mapTop      Float?
+  mapLeft     Float?
   createdAt   DateTime @default(now())
 }
 

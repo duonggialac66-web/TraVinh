@@ -15,6 +15,7 @@ export type SiteContent = {
   contactEmail: string
   contactPhone: string
   mapEmbedUrl: string
+  locationMapImage: string
 }
 
 export type Location = {
@@ -25,6 +26,11 @@ export type Location = {
   image: string
   tag: string
   order: number
+  mapTop?: number
+  mapLeft?: number
+  floatingImage1?: string | null
+  floatingImage2?: string | null
+  floatingImage3?: string | null
 }
 
 export type Festival = {
@@ -69,6 +75,7 @@ export const defaultSiteContent: SiteContent = {
   contactPhone: "+84 294 3862 xxx",
   mapEmbedUrl:
     "https://www.openstreetmap.org/export/embed.html?bbox=106.20%2C9.85%2C106.45%2C9.98&layer=mapnik",
+  locationMapImage: "/images/map.jpg",
 }
 
 export const defaultLocations: Location[] = [

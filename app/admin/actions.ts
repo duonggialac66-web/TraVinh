@@ -74,6 +74,11 @@ export async function saveLocationAction(_prev: unknown, formData: FormData) {
     image: String(formData.get("image") ?? ""),
     tag: String(formData.get("tag") ?? ""),
     order: Number(formData.get("order") ?? 0),
+    mapTop: formData.get("mapTop") ? Number(formData.get("mapTop")) : undefined,
+    mapLeft: formData.get("mapLeft") ? Number(formData.get("mapLeft")) : undefined,
+    floatingImage1: formData.get("floatingImage1") ? String(formData.get("floatingImage1")) : null,
+    floatingImage2: formData.get("floatingImage2") ? String(formData.get("floatingImage2")) : null,
+    floatingImage3: formData.get("floatingImage3") ? String(formData.get("floatingImage3")) : null,
   })
   revalidatePath("/")
   revalidatePath("/admin")

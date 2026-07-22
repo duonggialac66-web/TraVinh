@@ -2,7 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/next-auth";
 
 export async function checkoutCart(formData: FormData, items: Array<{ id: string, title: string, price: number, quantity: number }>, totalAmount: number) {
   const customerName = formData.get("customerName") as string;

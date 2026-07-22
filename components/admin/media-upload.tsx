@@ -3,8 +3,8 @@
 import { useState } from "react"
 import { Loader2, Upload, Link as LinkIcon } from "lucide-react"
 
-export function MediaUpload({ name, defaultValue }: { name: string; defaultValue: string }) {
-  const [value, setValue] = useState(defaultValue)
+export function MediaUpload({ name, defaultValue }: { name: string; defaultValue?: string }) {
+  const [value, setValue] = useState(defaultValue || "")
   const [isUploading, setIsUploading] = useState(false)
   const [mode, setMode] = useState<"url" | "upload">("upload")
 

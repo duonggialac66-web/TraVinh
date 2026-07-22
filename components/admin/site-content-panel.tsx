@@ -26,6 +26,7 @@ const fields: FieldDef[] = [
   { name: "contactEmail", label: "Liên hệ · Email" },
   { name: "contactPhone", label: "Liên hệ · Điện thoại" },
   { name: "mapEmbedUrl", label: "Liên hệ · URL bản đồ nhúng", type: "textarea" },
+  { name: "locationMapImage", label: "Bản đồ · Ảnh hành chính", type: "image" },
 ]
 
 function SaveButton() {

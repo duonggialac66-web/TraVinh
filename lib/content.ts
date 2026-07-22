@@ -117,6 +117,7 @@ export async function updateSiteContent(data: Record<string, string>) {
     "contactEmail",
     "contactPhone",
     "mapEmbedUrl",
+    "locationMapImage",
   ]
   const payload: Record<string, string> = {}
   for (const f of fields) {

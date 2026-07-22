@@ -128,6 +128,7 @@ exports.Prisma.SiteContentScalarFieldEnum = {
   heroSubtitle: 'heroSubtitle',
   heroImage: 'heroImage',
   logoImage: 'logoImage',
+  locationMapImage: 'locationMapImage',
   aboutHeading: 'aboutHeading',
   aboutBody: 'aboutBody',
   contactHeading: 'contactHeading',
@@ -146,6 +147,11 @@ exports.Prisma.LocationScalarFieldEnum = {
   image: 'image',
   tag: 'tag',
   order: 'order',
+  mapTop: 'mapTop',
+  mapLeft: 'mapLeft',
+  floatingImage1: 'floatingImage1',
+  floatingImage2: 'floatingImage2',
+  floatingImage3: 'floatingImage3',
   createdAt: 'createdAt'
 };
 
@@ -157,6 +163,8 @@ exports.Prisma.FestivalScalarFieldEnum = {
   image: 'image',
   season: 'season',
   order: 'order',
+  mapTop: 'mapTop',
+  mapLeft: 'mapLeft',
   createdAt: 'createdAt'
 };
 
@@ -166,6 +174,8 @@ exports.Prisma.FoodScalarFieldEnum = {
   description: 'description',
   image: 'image',
   order: 'order',
+  mapTop: 'mapTop',
+  mapLeft: 'mapLeft',
   createdAt: 'createdAt'
 };
 
@@ -185,6 +195,8 @@ exports.Prisma.TourScalarFieldEnum = {
   duration: 'duration',
   image: 'image',
   order: 'order',
+  mapTop: 'mapTop',
+  mapLeft: 'mapLeft',
   createdAt: 'createdAt'
 };
 
@@ -195,6 +207,8 @@ exports.Prisma.ProductScalarFieldEnum = {
   price: 'price',
   image: 'image',
   order: 'order',
+  mapTop: 'mapTop',
+  mapLeft: 'mapLeft',
   createdAt: 'createdAt'
 };
 
