@@ -32,7 +32,7 @@ export function LoginForm() {
           type="text"
           required
           autoComplete="username"
-          defaultValue="admin@travinh.travel"
+          defaultValue="duonggialac66@gmail.com"
           className="rounded-2xl border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus:border-accent"
         />
       </div>

@@ -48,7 +48,7 @@ export default async function LoginPage() {
         </div>
 
         <p className="mt-6 rounded-2xl bg-muted px-4 py-3 text-xs leading-relaxed text-muted-foreground">
-          Tài khoản mặc định: <span className="font-medium text-foreground">admin@travinh.travel</span>{" "}
+          Tài khoản mặc định: <span className="font-medium text-foreground">duonggialac66@gmail.com</span>{" "}
           / <span className="font-medium text-foreground">travinh2024</span>. Đổi lại bằng biến môi
           trường <code>ADMIN_USERNAME</code> và <code>ADMIN_PASSWORD</code> trong file .env.
         </p>

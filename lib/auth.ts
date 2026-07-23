@@ -6,7 +6,7 @@ export async function getSession() {
   const cookieStore = await cookies();
   const session = cookieStore.get(SESSION_COOKIE_NAME);
   if (!session?.value) return null;
-  
+
   return { userId: session.value };
 }
 
@@ -29,8 +29,7 @@ export async function clearSession() {
 const ADMIN_COOKIE_NAME = "admin_session";
 
 export function verifyCredentials(email: string, pass: string) {
-  // Demo purpose: basic auth via environment variable
-  return pass === process.env.ADMIN_PASSWORD;
+  return email === process.env.ADMIN_USERNAME && pass === process.env.ADMIN_PASSWORD;
 }
 
 export async function createSession() {
@@ -48,7 +47,20 @@ export async function destroySession() {
   cookieStore.delete(ADMIN_COOKIE_NAME);
 }
 
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "./next-auth";
+
 export async function isAuthenticated() {
   const cookieStore = await cookies();
-  return cookieStore.has(ADMIN_COOKIE_NAME);
+  if (cookieStore.has(ADMIN_COOKIE_NAME)) {
+    return true;
+  }
+
+  // Check Google login session
+  const session = await getServerSession(authOptions);
+  if (session?.user?.email && session.user.email === process.env.ADMIN_USERNAME) {
+    return true;
+  }
+
+  return false;
 }
