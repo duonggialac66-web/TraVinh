@@ -23,21 +23,21 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Vui lòng nhập email và mật khẩu");
         }
-        
+
         const user = await prisma.user.findUnique({
           where: { email: credentials.email }
         });
-        
+
         if (!user || !user.password) {
           throw new Error("Tài khoản không tồn tại hoặc đăng nhập bằng Google");
         }
-        
+
         const isPasswordValid = bcrypt.compareSync(credentials.password, user.password);
-        
+
         if (!isPasswordValid) {
           throw new Error("Mật khẩu không chính xác");
         }
-        
+
         return user as any;
       }
     })
@@ -49,16 +49,18 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }: any) {
       if (session?.user && token?.sub) {
         session.user.id = token.sub;
-        
+
         try {
           const dbUser = await prisma.user.findUnique({
             where: { id: token.sub },
-            select: { name: true, image: true }
+            select: { name: true, image: true, email: true, role: true }
           });
-          
+
           if (dbUser) {
             session.user.name = dbUser.name;
             session.user.image = dbUser.image;
+            session.user.email = dbUser.email;
+            (session.user as any).role = dbUser.role;
           }
         } catch (error) {
           console.error("Lỗi khi fetch user session:", error);

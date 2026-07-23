@@ -122,7 +122,13 @@ model Product {
 }
 
 /// Người dùng đăng ký
+enum Role {
+  USER
+  ADMIN
+}
+
 model User {
+  role          Role           @default(USER)
   id            String         @id @default(cuid())
   name          String?
   email         String?        @unique

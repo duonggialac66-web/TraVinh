@@ -58,7 +58,7 @@ export async function isAuthenticated() {
 
   // Check Google login session
   const session = await getServerSession(authOptions);
-  if (session?.user?.email && session.user.email === process.env.ADMIN_USERNAME) {
+  if ((session?.user as any)?.role === "ADMIN") {
     return true;
   }
 
